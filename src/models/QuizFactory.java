@@ -73,11 +73,16 @@ public class QuizFactory {
 	public void insertQuiz(Quiz quiz) {
 		DBConnection connection = new DBConnection();
 		
-		connection.insert("INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
+		int quizID = connection.insert("INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
 										"VALUES ('" + quiz.getName() + "', '" + quiz.getDescription() + "', '"
 										 + quiz.getCreatorID() + "', '" + (quiz.isOrdered() ? 1 : 0) + "', '" + (quiz.isMultipage() ? 1 : 0) + "')");
-		for(Question q : quiz.getQuestions()) {
+		quiz.setId(quizID);
+		ArrayList<Question> questions = quiz.getQuestions();
+		for(int i = 0; i < questions.size(); i++) {
+			Question q = questions.get(i);
 			QuestionFactory factory = QuestionFactory.sharedInstance();
+			q.setQuizID(quizID);
+			q.setOrderIndex(i);
 			factory.insertQuestion(q);
 		}
 	}

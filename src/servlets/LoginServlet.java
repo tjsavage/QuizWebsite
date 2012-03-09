@@ -46,6 +46,10 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher dispatch;
 		if (userAuthentication.Authenticate(username, password)) {
 			User user = (User) request.getSession().getAttribute("user");
+			if (user == null) {
+				user = new User(false);
+				request.getSession().setAttribute("user", user);
+			}
 			user.setUsername(username);
 			user.setPassword(password);
 			response.sendRedirect("/QuizWebsite/HomepageServlet");
