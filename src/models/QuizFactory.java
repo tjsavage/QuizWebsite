@@ -69,4 +69,8 @@ public class QuizFactory {
 		
 		return questions;
 	}
+	
+	public void insertQuiz(Quiz quiz) {
+		
+	}
 }
