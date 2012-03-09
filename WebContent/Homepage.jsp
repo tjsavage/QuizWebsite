@@ -13,7 +13,7 @@
 <body>
 	<h1>It's the homepage, stupid.</h1>
 	<%
-		out.print("<a href = \"UserPageServlet?id=" + user.getID() + "\">" + user.getUsername() + "</a>");
+		out.print("<a href = \"UserPageServlet\">" + user.getUsername() + "</a>");
 	%>
 	
 </body>
