@@ -14,14 +14,14 @@ import models.User;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/RegisterServlet")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +30,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
-		request.setAttribute("isIncorrect", false);
+		RequestDispatcher dispatch = request.getRequestDispatcher("Register.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -42,19 +41,13 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		//database stuff
-		int x = 0;
-		RequestDispatcher dispatch;
-		if (x == 1) {
-			User user = (User) request.getSession().getAttribute("user");
-			user.setUsername(username);
-			user.setPassword(password);
-			dispatch = request.getRequestDispatcher("HomepageServlet.java");
-			dispatch.forward(request, response);
-		} else {
-			request.setAttribute("isIncorrect", true);
-			dispatch = request.getRequestDispatcher("Login.jsp");
-			dispatch.forward(request, response);
-		}
+		//if valid:
+		User user = (User) request.getSession().getAttribute("user");
+		user.setUsername(username);
+		user.setPassword(password);
+		//jump to homepageservlet.java
+		//else:
+		//jump to inuseservlet.java
 		
 	}
 
