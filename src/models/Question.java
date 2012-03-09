@@ -17,11 +17,14 @@ public class Question {
 	protected String question;
 	protected int orderIndex;
 	protected QuestionType type;
-	
-	
+	protected ArrayList<String> correctAnswers;
 
 	public Question() {
 		
+	}
+	
+	public ArrayList<String> getCorrectAnswers() {
+		return this.correctAnswers;
 	}
 	
 	public boolean isCorrectAnswer(Object answer) {

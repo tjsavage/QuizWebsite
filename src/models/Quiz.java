@@ -35,6 +35,20 @@ public class Quiz {
 		this.dateCreated = dateCreated;
 	}
 	
+	public Quiz(String name, 
+			String description, 
+			int creatorID, 
+			boolean ordered, 
+			ArrayList<Question> questions,
+			boolean multipage) {
+		this.name = name;
+		this.description = description;
+		this.creatorID = creatorID;
+		this.ordered = ordered;
+		this.questions = questions;
+		this.multipage = multipage;
+	}
+	
 	public int getId() {
 		return id;
 	}

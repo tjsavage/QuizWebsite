@@ -3,10 +3,14 @@ package models;
 import java.util.ArrayList;
 
 public class QuestionResponseQuestion extends Question {
-	private ArrayList<String> correctAnswers;
-	
 	public QuestionResponseQuestion(int id, String question, ArrayList<String> correctAnswers) {
 		this.id = id;
+		this.question = question;
+		this.correctAnswers = correctAnswers;
+		this.type = Question.QuestionType.QUESTION_RESPONSE;
+	}
+	
+	public QuestionResponseQuestion(String question, ArrayList<String> correctAnswers) {
 		this.question = question;
 		this.correctAnswers = correctAnswers;
 		this.type = Question.QuestionType.QUESTION_RESPONSE;

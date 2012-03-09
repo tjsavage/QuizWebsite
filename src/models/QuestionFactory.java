@@ -97,6 +97,9 @@ public class QuestionFactory {
 				id = connection.insert("INSERT INTO questions (quizID, question_type, specific_questionID, order_index) VALUES " +
 											"('" + q.getQuizID() + "', '" + q.getTypeInt() + "', '" + specificID + "', '" + q.getOrderIndex() + "')");
 				q.setId(id);
+				for(String answer : q.getCorrectAnswers()) {
+					connection.insert("INSERT INTO answers (questionID, answer) VALUES ('" + id + "', '" + answer + "')");
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
