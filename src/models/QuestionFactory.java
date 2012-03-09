@@ -70,5 +70,59 @@ public class QuestionFactory {
 		QuestionResponseQuestion question = new QuestionResponseQuestion(questionID, question_text, answers);
 		return question;	
 	}
+	
+	public void insertQuestion(Question q) {
+		long specificID;
+		switch (q.type) {
+		case QUESTION_RESPONSE:
+			specificID = insertQuestionResponseQuestion(q);
+			break;
+		case FILL_IN:
+			specificID = insertFillInQuestion(q);
+			break;
+		case MULTIPLE_CHOICE:
+			specificID = insertMultipleChoiceQuestion(q);
+			break;
+		case PICTURE_RESPONSE:
+			specificID = insertPictureResponseQuestion(q);
+			break;
+		default:
+			specificID = -1;
+		}
+		if (specificID != -1) {
+			DBConnection connection = new DBConnection();
+			
+			int id;
+			try {
+				id = connection.insert("INSERT INTO questions (quizID, question_type, specific_questionID, order_index) VALUES " +
+											"('" + q.getQuizID() + "', '" + q.getTypeInt() + "', '" + specificID + "', '" + q.getOrderIndex() + "')");
+				q.setId(id);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	private long insertPictureResponseQuestion(Question q) {
+		return 0;
+		// TODO Auto-generated method stub
+		
+	}
+	private long insertMultipleChoiceQuestion(Question q) {
+		return 0;
+		// TODO Auto-generated method stub
+		
+	}
+	private long insertFillInQuestion(Question q) {
+		return 0;
+		// TODO Auto-generated method stub
+		
+	}
+	private long insertQuestionResponseQuestion(Question q) {
+		DBConnection connection = new DBConnection();
+		
+		int specific_id = connection.insert("INSERT INTO question_response_questions (question_text) VALUES ('" + q.getQuestion() + "')");
+		return specific_id;
+	}
 
 }

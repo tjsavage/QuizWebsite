@@ -30,8 +30,6 @@ public class DBConnection {
 		}
 	}
 				
-		
-		
 	public ResultSet performQuery(String query) {
 		try {
 			Statement stmt = connection.createStatement();
@@ -44,14 +42,22 @@ public class DBConnection {
 		return null;
 	}
 	
-	public void insert(String query) {
+	public int insert(String query) {
 		Statement stmt;
 		try {
 			stmt = connection.createStatement();
 			stmt.executeUpdate(query);
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				return generatedKeys.getInt(1);
+			} else {
+				throw new SQLException("Didn't get back a key for the insert");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return -1;
 	}
 	
 }

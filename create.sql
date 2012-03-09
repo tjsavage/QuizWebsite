@@ -41,33 +41,31 @@ CREATE TABLE IF NOT EXISTS questions(
 CREATE TABLE IF NOT EXISTS question_response_questions(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	questionID INT UNSIGNED NOT NULL REFERENCES questions(id),
 	question_text TEXT
 );
 
 CREATE TABLE IF NOT EXISTS fill_in_questions(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	questionID INT UNSIGNED NOT NULL REFERENCES questions(id),
 	question_text TEXT
 );
 
 CREATE TABLE IF NOT EXISTS multiple_choice_questions(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	questionID INT UNSIGNED NOT NULL REFERENCES questions(id),
 	question_text TEXT
 );
 
 CREATE TABLE IF NOT EXISTS multiple_choice_choices(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	questionID INT UNSIGNED NOT NULL REFERENCES questions(id),
 	choice VARCHAR(60)
 );
 
 CREATE TABLE IF NOT EXISTS picture_response_questions(
-	
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(id),
+	question_text TEXT
 );
 
 CREATE TABLE IF NOT EXISTS answers(

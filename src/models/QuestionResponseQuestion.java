@@ -9,6 +9,7 @@ public class QuestionResponseQuestion extends Question {
 		this.id = id;
 		this.question = question;
 		this.correctAnswers = correctAnswers;
+		this.type = Question.QuestionType.QUESTION_RESPONSE;
 	}
 	
 	public boolean isCorrectAnswer(String answer) {

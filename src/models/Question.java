@@ -16,14 +16,9 @@ public class Question {
 	protected int quizID;
 	protected String question;
 	protected int orderIndex;
+	protected QuestionType type;
 	
-	public int getOrderIndex() {
-		return orderIndex;
-	}
-
-	public void setOrderIndex(int orderIndex) {
-		this.orderIndex = orderIndex;
-	}
+	
 
 	public Question() {
 		
@@ -51,6 +46,37 @@ public class Question {
 	
 	public String getAnswerString() {
 		return "";
+	}
+	
+	public int getOrderIndex() {
+		return orderIndex;
+	}
+
+	public void setOrderIndex(int orderIndex) {
+		this.orderIndex = orderIndex;
+	}
+	
+	public int getQuizID() {
+		return this.quizID;
+	}
+	
+	public QuestionType getType() {
+		return this.type;
+	}
+	
+	public int getTypeInt() throws Exception {
+		switch(type) {
+		case QUESTION_RESPONSE:
+			return 0;
+		case FILL_IN:
+			return 1;
+		case MULTIPLE_CHOICE:
+			return 2;
+		case PICTURE_RESPONSE:
+			return 3;
+		default:
+			throw new Exception("Undefined question type: " + type);
+		}
 	}
 
 	public static QuestionType QuestionType(int questionType) throws Exception {

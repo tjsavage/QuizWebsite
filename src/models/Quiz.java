@@ -7,6 +7,8 @@ import java.sql.Date;
 
 public class Quiz {
 	private int id;
+	
+
 	private String name;
 	private String description;
 	private int creatorID;
@@ -30,6 +32,70 @@ public class Quiz {
 		this.ordered = ordered;
 		this.questions = questions;
 		this.multipage = multipage;
+		this.dateCreated = dateCreated;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getCreatorID() {
+		return creatorID;
+	}
+
+	public void setCreatorID(int creatorID) {
+		this.creatorID = creatorID;
+	}
+
+	public boolean isOrdered() {
+		return ordered;
+	}
+
+	public void setOrdered(boolean ordered) {
+		this.ordered = ordered;
+	}
+
+	public ArrayList<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(ArrayList<Question> questions) {
+		this.questions = questions;
+	}
+
+	public boolean isMultipage() {
+		return multipage;
+	}
+
+	public void setMultipage(boolean multipage) {
+		this.multipage = multipage;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 	

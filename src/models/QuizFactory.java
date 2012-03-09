@@ -71,6 +71,14 @@ public class QuizFactory {
 	}
 	
 	public void insertQuiz(Quiz quiz) {
+		DBConnection connection = new DBConnection();
 		
+		connection.insert("INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
+										"VALUES ('" + quiz.getName() + "', '" + quiz.getDescription() + "', '"
+										 + quiz.getCreatorID() + "', '" + quiz.isOrdered() + "', '" + quiz.isMultipage() + "')");
+		for(Question q : quiz.getQuestions()) {
+			QuestionFactory factory = QuestionFactory.sharedInstance();
+			factory.insertQuestion(q);
+		}
 	}
 }
