@@ -21,4 +21,3 @@ DROP TABLE IF EXISTS multiple_choice_choices;
 DROP TABLE IF EXISTS picture_response_questions;
 
 DROP TABLE IF EXISTS answers;
-
