@@ -75,7 +75,7 @@ public class QuizFactory {
 		
 		connection.insert("INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
 										"VALUES ('" + quiz.getName() + "', '" + quiz.getDescription() + "', '"
-										 + quiz.getCreatorID() + "', '" + quiz.isOrdered() + "', '" + quiz.isMultipage() + "')");
+										 + quiz.getCreatorID() + "', '" + (quiz.isOrdered() ? 1 : 0) + "', '" + (quiz.isMultipage() ? 1 : 0) + "')");
 		for(Question q : quiz.getQuestions()) {
 			QuestionFactory factory = QuestionFactory.sharedInstance();
 			factory.insertQuestion(q);

@@ -46,7 +46,7 @@ public class DBConnection {
 		Statement stmt;
 		try {
 			stmt = connection.createStatement();
-			stmt.executeUpdate(query);
+			stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			
 			ResultSet generatedKeys = stmt.getGeneratedKeys();
 			if (generatedKeys.next()) {

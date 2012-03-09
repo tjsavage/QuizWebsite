@@ -66,7 +66,7 @@ public class CreateQuizServlet extends HttpServlet {
 			}
 		}
 		
-		Quiz quiz = new Quiz(name, description, user.getId(), ordered, questions, multi_page);
+		Quiz quiz = new Quiz(name, description, user.getID(), ordered, questions, multi_page);
 		QuizFactory factory = QuizFactory.sharedInstance();
 		factory.insertQuiz(quiz);
 	}
