@@ -11,6 +11,8 @@ public class FriendRequest {
 		this.UsernameFrom = UsernameFrom;
 		this.UsernameTo = UsernameTo;
 		
+		
+		
 	}
 
 }
