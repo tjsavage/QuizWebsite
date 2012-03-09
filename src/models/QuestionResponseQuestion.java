@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class QuestionResponseQuestion extends Question {
 	private ArrayList<String> correctAnswers;
 	
-	public QuestionResponseQuestion(String question, ArrayList<String> correctAnswers) {
+	public QuestionResponseQuestion(int id, String question, ArrayList<String> correctAnswers) {
+		this.id = id;
 		this.question = question;
 		this.correctAnswers = correctAnswers;
 	}

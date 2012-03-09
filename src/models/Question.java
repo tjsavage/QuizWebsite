@@ -2,13 +2,15 @@ package models;
 
 import java.util.ArrayList;
 
-public abstract class Question {
-	public enum QUESTION_TYPE {
+import models.Question.QuestionType;
+
+public class Question {
+	enum QuestionType {
 		QUESTION_RESPONSE,
 		FILL_IN,
 		MULTIPLE_CHOICE,
-		PICTURE_RESPONSE
-	};
+		PICTURE_RESPONSE,
+	}
 	
 	protected int id;
 	protected int quizID;
@@ -49,5 +51,20 @@ public abstract class Question {
 	
 	public String getAnswerString() {
 		return "";
+	}
+
+	public static QuestionType QuestionType(int questionType) throws Exception {
+		switch(questionType) {
+		case 0:
+			return QuestionType.QUESTION_RESPONSE;
+		case 1:
+			return QuestionType.FILL_IN;
+		case 2:
+			return QuestionType.MULTIPLE_CHOICE;
+		case 3:
+			return QuestionType.PICTURE_RESPONSE;
+		default:
+			throw new Exception("Undefined question type: " + questionType);
+		}
 	}
 }
