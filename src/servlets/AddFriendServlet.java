@@ -1,9 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.User;
-import models.UserFactory;
 
 /**
- * Servlet implementation class UserPageServlet
+ * Servlet implementation class AddFriendServlet
  */
-@WebServlet("/UserPageServlet")
-public class UserPageServlet extends HttpServlet {
+@WebServlet("/AddFriendServlet")
+public class AddFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPageServlet() {
+    public AddFriendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +28,17 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch;; 
-		UserFactory uf = new UserFactory();
-		User user = (User) request.getSession().getAttribute("user");
-		int id = user.getID();
-		ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
-		ArrayList<User> friendRequests = uf.getFriendRequests(id);
-		ArrayList<User> friends = uf.getFriends(id);
-		request.setAttribute("pendingFriends", pendingFriends);
-		request.setAttribute("friendRequests", friendRequests);
-		request.setAttribute("friends", friends);
-		dispatch = request.getRequestDispatcher("UserPage.jsp");
-		dispatch.forward(request, response);
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int id = Integer.parseInt(request.getParameter("id"));
+		User user = (User) request.getSession().getAttribute("user");
+		user.addFriend(id);
+		response.sendRedirect("/QuizWebsite/UserPageServlet");
 	}
 
 }

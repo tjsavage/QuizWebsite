@@ -63,6 +63,10 @@ public class Question {
 		return this.quizID;
 	}
 	
+	public void setQuizID(int id) {
+		this.quizID = id;
+	}
+	
 	public QuestionType getType() {
 		return this.type;
 	}

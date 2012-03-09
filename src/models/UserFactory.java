@@ -11,9 +11,58 @@ public class UserFactory {
 	}
 	
 	public ArrayList<User> getListUsers(int id) {
+		return getUsers(id, " SELECT * FROM users WHERE NOT id = ");
+	}
+	
+	public ArrayList<User> getPendingFriendRequests(int id) {
+		DBConnection connection = new DBConnection();
+		ArrayList<User> users = new ArrayList<User>();
+		ResultSet rs = connection.performQuery(" SELECT * FROM friend_requests WHERE friendFromID = " + id);
+		try {
+			while (rs.next()) {
+				User user = getUserFromID(rs.getInt("friendToID"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	public ArrayList<User> getFriendRequests(int id) {
+		DBConnection connection = new DBConnection();
+		ArrayList<User> users = new ArrayList<User>();
+		ResultSet rs = connection.performQuery(" SELECT * FROM friend_requests WHERE friendToID = " + id);
+		try {
+			while (rs.next()) {
+				User user = getUserFromID(rs.getInt("friendFromID"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	public ArrayList<User> getFriends(int id) {
+		DBConnection connection = new DBConnection();
+		ArrayList<User> users = new ArrayList<User>();
+		ResultSet rs = connection.performQuery(" SELECT * FROM friends_join WHERE friend1ID = " + id);
+		try {
+			while (rs.next()) {
+				User user = getUserFromID(rs.getInt("friend2ID"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	private ArrayList<User> getUsers(int id, String query) {
 		ArrayList<User> users = new ArrayList<User>();
 		DBConnection connection = new DBConnection();
-		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE NOT id = " + id);
+		ResultSet rs = connection.performQuery(query + id);//friends list
 		try {
 			while (rs.next()) {
 				User user = new User(false);
@@ -26,6 +75,20 @@ public class UserFactory {
 		}
 		
 		return users;
+	}
+	
+	public User getUserFromID(int id) {
+		DBConnection connection = new DBConnection();
+		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE id = " + id);
+		User user = new User(false);;
+		try {
+			rs.next();
+			user.setUsername(rs.getString("username"));
+			user.setPassword(rs.getString("password"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 	
 }
