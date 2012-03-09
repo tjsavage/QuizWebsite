@@ -10,8 +10,8 @@
 	<h1>Welcome to Jack and taylor's Website</h1>
 		<p> 
 		<%
-		Boolean bool = (Boolean) request.getAttribute("isIncorrect");
-		if (bool) out.println("Your information was incorrect.");
+		Boolean isIncorrect = (Boolean) request.getAttribute("isIncorrect");
+		if (isIncorrect) out.println("Your information was incorrect.");
 		else out.println("Please log in.");
 		%>
 		</p> 

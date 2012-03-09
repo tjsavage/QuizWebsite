@@ -7,8 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome to Jack and taylor's Website</h1>
-		<p> Please enter an new user name and password. </p> 
+<h1>Register to Jack and taylor's Website</h1>
+		<p>
+		<%
+		Boolean isInUse = (Boolean) request.getAttribute("isInUse");
+		if (isInUse) out.println("That username is already in use.");
+		else out.println("Please enter a username and password.");
+		%>
+		</p> 
 		<form method = "post" action = "RegisterServlet" >
 			<p> 
 				User Name: <input type="text" name=username>

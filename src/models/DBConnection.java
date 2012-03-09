@@ -43,4 +43,15 @@ public class DBConnection {
 		}
 		return null;
 	}
+	
+	public void insert(String query) {
+		Statement stmt;
+		try {
+			stmt = connection.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

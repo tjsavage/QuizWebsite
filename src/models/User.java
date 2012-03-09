@@ -4,9 +4,10 @@ public class User {
 	
 	private String username;
 	private String password;
+	private boolean isLoggedIn;
 	
-	public User() {
-		//empty constructor
+	public User(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
 	}
 	
 	public void setUsername(String username) {
@@ -23,6 +24,14 @@ public class User {
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+	
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
 	}
 	
 }

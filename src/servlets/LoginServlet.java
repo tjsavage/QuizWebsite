@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.User;
+import models.UserAuthentication;
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,15 +42,13 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		//database stuff
-		int x = 0;
+		UserAuthentication userAuthentication = new UserAuthentication();
 		RequestDispatcher dispatch;
-		if (x == 1) {
+		if (userAuthentication.Authenticate(username, password)) {
 			User user = (User) request.getSession().getAttribute("user");
 			user.setUsername(username);
 			user.setPassword(password);
-			dispatch = request.getRequestDispatcher("HomepageServlet.java");
-			dispatch.forward(request, response);
+			response.sendRedirect("/QuizWebsite/HomepageServlet");
 		} else {
 			request.setAttribute("isIncorrect", true);
 			dispatch = request.getRequestDispatcher("Login.jsp");

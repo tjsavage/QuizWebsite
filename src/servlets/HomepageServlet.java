@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.User;
-import models.UserAuthentication;
-
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class HomepageServlet
  */
-@WebServlet("/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/HomepageServlet")
+public class HomepageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public HomepageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +28,7 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch = request.getRequestDispatcher("Register.jsp");
-		request.setAttribute("isInUse", false);
+		RequestDispatcher dispatch = request.getRequestDispatcher("Homepage.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -40,20 +36,7 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		UserAuthentication userAuthentication = new UserAuthentication();
-		if (userAuthentication.Register(username, password)) {
-			User user = (User) request.getSession().getAttribute("user");
-			user.setUsername(username);
-			user.setPassword(password);
-			response.sendRedirect("/QuizWebsite/HomepageServlet");
-		} else {
-			RequestDispatcher dispatch; 
-			request.setAttribute("isInUse", true);
-			dispatch = request.getRequestDispatcher("Register.jsp");
-			dispatch.forward(request, response);
-		}
+		// TODO Auto-generated method stub
 	}
 
 }
