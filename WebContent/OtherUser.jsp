@@ -26,7 +26,8 @@
 			%>
 		</p>
 	<%
-		out.print("<a href = \"UserPageServlet\"> My User Page </a>");
+		out.print("<a href = \"MessageServlet?id=" + other.getID() + "\"> Send them a message. </a> <br>");
+		out.print("<a href = \"UserPageServlet\"> I want to go home. </a>");
 	%>
 </body>
 </html>
