@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Message;
+import models.MessageFactory;
 import models.User;
 import models.UserFactory;
 
 /**
- * Servlet implementation class UserPageServlet
+ * Servlet implementation class MessageServlet
  */
-@WebServlet("/UserPageServlet")
-public class UserPageServlet extends HttpServlet {
+@WebServlet("/MessageServlet")
+public class MessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPageServlet() {
+    public MessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +33,13 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch;; 
+		RequestDispatcher dispatch;
+		System.out.print(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		UserFactory uf = new UserFactory();
-		User user = (User) request.getSession().getAttribute("user");
-		int id = user.getID();
-		ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
-		ArrayList<User> friendRequests = uf.getFriendRequests(id);
-		ArrayList<User> friends = uf.getFriends(id);
-		request.setAttribute("pendingFriends", pendingFriends);
-		request.setAttribute("friendRequests", friendRequests);
-		request.setAttribute("friends", friends);
-		dispatch = request.getRequestDispatcher("UserPage.jsp");
+		User other = uf.getUserFromID(id);
+		request.setAttribute("other", other);
+		dispatch = request.getRequestDispatcher("Message.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -50,7 +47,17 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		User user = (User) request.getSession().getAttribute("user");
+		MessageFactory mf = new MessageFactory();
+		Message message = new Message();
+		message.setToID(Integer.parseInt(request.getParameter("id")));
+		message.setFromID(user.getID());
+		message.setMessage(request.getParameter("message"));
+		message.setRead(false);
+		mf.sendMessage(message);
+		RequestDispatcher dispatch;
+		dispatch = request.getRequestDispatcher("UserPage.jsp");
+		dispatch.forward(request, response);
 	}
 
 }

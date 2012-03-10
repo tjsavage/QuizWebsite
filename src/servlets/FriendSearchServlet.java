@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -14,16 +15,16 @@ import models.User;
 import models.UserFactory;
 
 /**
- * Servlet implementation class UserPageServlet
+ * Servlet implementation class FriendSearchServlet
  */
-@WebServlet("/UserPageServlet")
-public class UserPageServlet extends HttpServlet {
+@WebServlet("/FriendSearchServlet")
+public class FriendSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPageServlet() {
+    public FriendSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +33,13 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch;; 
+		RequestDispatcher dispatch; 
 		UserFactory uf = new UserFactory();
 		User user = (User) request.getSession().getAttribute("user");
 		int id = user.getID();
-		ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
-		ArrayList<User> friendRequests = uf.getFriendRequests(id);
-		ArrayList<User> friends = uf.getFriends(id);
-		request.setAttribute("pendingFriends", pendingFriends);
-		request.setAttribute("friendRequests", friendRequests);
-		request.setAttribute("friends", friends);
-		dispatch = request.getRequestDispatcher("UserPage.jsp");
+		ArrayList<User> users = uf.getListUsers(id);
+		request.setAttribute("users", users);
+		dispatch = request.getRequestDispatcher("FriendSearch.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -50,7 +47,15 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		RequestDispatcher dispatch; 
+		User other = (User) request.getSession().getAttribute("other");
+		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isFriend(other.getID()) && !user.isWaiting(other.getID())) {
+			user.sendFriendRequest(other.getID());
+			response.sendRedirect("/QuizWebsite/OtherUserServlet?id=" + other.getID());
+		} else {
+			response.sendRedirect("/QuizWebsite/OtherUserServlet?id=" + other.getID());
+		}
 	}
 
 }

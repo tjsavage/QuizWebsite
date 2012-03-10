@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import models.User;
 import models.UserFactory;
 
 /**
- * Servlet implementation class UserPageServlet
+ * Servlet implementation class OtherUserServlet
  */
-@WebServlet("/UserPageServlet")
-public class UserPageServlet extends HttpServlet {
+@WebServlet("/OtherUserServlet")
+public class OtherUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPageServlet() {
+    public OtherUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +31,15 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch;; 
+		RequestDispatcher dispatch;
+		int id = Integer.parseInt(request.getParameter("id"));
 		UserFactory uf = new UserFactory();
+		User other = uf.getUserFromID(id);
 		User user = (User) request.getSession().getAttribute("user");
-		int id = user.getID();
-		ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
-		ArrayList<User> friendRequests = uf.getFriendRequests(id);
-		ArrayList<User> friends = uf.getFriends(id);
-		request.setAttribute("pendingFriends", pendingFriends);
-		request.setAttribute("friendRequests", friendRequests);
-		request.setAttribute("friends", friends);
-		dispatch = request.getRequestDispatcher("UserPage.jsp");
+		request.setAttribute("isFriend", user.isFriend(other.getID()));
+		request.setAttribute("isWaiting", user.isWaiting(other.getID()));
+		request.setAttribute("other", other);
+		dispatch = request.getRequestDispatcher("OtherUser.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -50,7 +47,7 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 
 }
