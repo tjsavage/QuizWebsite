@@ -65,6 +65,12 @@ public class User {
 		connection.insert("DELETE FROM friend_requests WHERE friendFromID = " + id + " AND friendToID = " + this.id);
 	}
 	
+	public void removeFriend(int id) {
+		DBConnection connection = new DBConnection();
+		connection.insert("DELETE FROM friends_join WHERE friend1ID = " + this.id +  "AND friend2ID = " + id);
+		connection.insert("DELETE FROM friends_join WHERE friend1ID = " + id + " AND friend2ID = " + this.id);
+	}
+	
 	public void sendFriendRequest(int id) {
 		DBConnection connection = new DBConnection();
 		connection.insert("INSERT INTO friend_requests (friendFromID, friendToID) values( " + this.id + " , " + id + ")");

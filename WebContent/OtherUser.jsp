@@ -18,16 +18,15 @@
 			<% 
 				if ((Boolean) request.getAttribute("isWaiting")) out.print("Your friend request is pending.");
 				else if ((Boolean) request.getAttribute("isFriend")) out.print("You're friends with " + other.getUsername());
-				else out.print("You are not friends with " + other.getUsername());
+				else {
+					out.print("You are not friends with " + other.getUsername());
+					out.print("<form method = \"post\" action = \"FriendSearchServlet\" >");
+					out.print("<p> <input type = \"submit\" value= \"Add" + other.getUsername() +  "\" > </p></form>");
+				}
 			%>
 		</p>
-		<form method = "post" action = "FriendSearchServlet" >
-			<p> 
-				<input type = "submit" value= "Add <%= other.getUsername() %> " >
-			</p>
-		</form>
 	<%
-		out.print("<a href = \"UserPageServlet\">" + user.getUsername() + "</a>");
+		out.print("<a href = \"UserPageServlet\"> My User Page </a>");
 	%>
 </body>
 </html>

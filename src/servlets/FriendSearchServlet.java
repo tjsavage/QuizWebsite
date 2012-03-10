@@ -50,7 +50,7 @@ public class FriendSearchServlet extends HttpServlet {
 		RequestDispatcher dispatch; 
 		User other = (User) request.getSession().getAttribute("other");
 		User user = (User) request.getSession().getAttribute("user");
-		if (!user.isFriend(other.getID()) || !user.isWaiting(other.getID())) {
+		if (!user.isFriend(other.getID()) && !user.isWaiting(other.getID())) {
 			user.sendFriendRequest(other.getID());
 			response.sendRedirect("/QuizWebsite/OtherUserServlet?id=" + other.getID());
 		} else {

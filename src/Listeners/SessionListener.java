@@ -28,6 +28,7 @@ public class SessionListener implements HttpSessionListener {
     	User user = new User(false);
     	HttpSession session = event.getSession();
     	session.setAttribute("user", user);
+    	System.out.print(session.getMaxInactiveInterval());
     }
 
 	/**
