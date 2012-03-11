@@ -28,35 +28,9 @@ public class QuestionFactory {
 		}
 	}
 	
-	private Question retrievePictureResponseQuestion(int questionID,
-			int specificID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private Question retrieveMultipleChoiceQuestion(int questionID,
-			int specificID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private Question retrieveFillInQuestion(int questionID, int specificID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private QuestionResponseQuestion retrieveQuestionResponseQuestion(int questionID, int specificID) {
+	private ArrayList<String> retrieveAnswers(int questionID) {
 		DBConnection connection = new DBConnection();
-		
-		ResultSet rs = connection.performQuery("SELECT * FROM question_response_questions WHERE id=" + specificID);
-		QuestionFactory qf = QuestionFactory.sharedInstance();
-		String question_text = "";
-		
-		try {
-			rs.next();
-			question_text = rs.getString("question_text");	
- 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		rs = connection.performQuery("SELECT * FROM answers WHERE questionID=" + questionID);
+		ResultSet rs = connection.performQuery("SELECT * FROM answers WHERE questionID=" + questionID);
 		ArrayList<String> answers = new ArrayList<String>();
 		
 		try {
@@ -66,6 +40,91 @@ public class QuestionFactory {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return answers;
+	}
+	
+	private Question retrievePictureResponseQuestion(int questionID,
+			int specificID) {
+		DBConnection connection = new DBConnection();
+		
+		ResultSet rs = connection.performQuery("SELECT * FROM picture_response_questions WHERE id=" + specificID);
+		String question_text = "";
+		
+		try {
+			rs.next();
+			question_text = rs.getString("question_text");	
+ 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		ArrayList<String> answers = retrieveAnswers(questionID);
+		
+		FillInQuestion question = new FillInQuestion(questionID, question_text, answers);
+		return question;
+	}
+	private Question retrieveMultipleChoiceQuestion(int questionID,
+			int specificID) {
+		DBConnection connection = new DBConnection();
+		
+		ResultSet rs = connection.performQuery("SELECT * FROM multiple_choice_questions WHERE id=" + specificID);
+		String question_text = "";
+		
+		try {
+			rs.next();
+			question_text = rs.getString("question_text");	
+ 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		rs = connection.performQuery("SELECT * FROM multiple_choice_choices WHERE questionID=" + questionID);
+		ArrayList<String> choices = new ArrayList<String>();
+		
+		try {
+			while(rs.next()) {
+				String choice = rs.getString("choice");
+				choices.add(choice);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		ArrayList<String> answers = retrieveAnswers(questionID);
+		
+		MultipleChoiceQuestion question = new MultipleChoiceQuestion(specificID, question_text, choices, answers.get(0));
+		return question;
+	}
+	private FillInQuestion retrieveFillInQuestion(int questionID, int specificID) {
+		DBConnection connection = new DBConnection();
+		
+		ResultSet rs = connection.performQuery("SELECT * FROM fill_in_questions WHERE id=" + specificID);
+		String question_text = "";
+		
+		try {
+			rs.next();
+			question_text = rs.getString("question_text");	
+ 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		ArrayList<String> answers = retrieveAnswers(questionID);
+		
+		FillInQuestion question = new FillInQuestion(questionID, question_text, answers);
+		return question;
+	}
+	private QuestionResponseQuestion retrieveQuestionResponseQuestion(int questionID, int specificID) {
+		DBConnection connection = new DBConnection();
+		
+		ResultSet rs = connection.performQuery("SELECT * FROM question_response_questions WHERE id=" + specificID);
+		String question_text = "";
+		
+		try {
+			rs.next();
+			question_text = rs.getString("question_text");	
+ 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		ArrayList<String> answers = retrieveAnswers(questionID);
 		
 		QuestionResponseQuestion question = new QuestionResponseQuestion(questionID, question_text, answers);
 		return question;	
@@ -81,7 +140,7 @@ public class QuestionFactory {
 			specificID = insertFillInQuestion(q);
 			break;
 		case MULTIPLE_CHOICE:
-			specificID = insertMultipleChoiceQuestion(q);
+			specificID = insertMultipleChoiceQuestion((MultipleChoiceQuestion)q);
 			break;
 		case PICTURE_RESPONSE:
 			specificID = insertPictureResponseQuestion(q);
@@ -107,19 +166,29 @@ public class QuestionFactory {
 		}
 	}
 	private long insertPictureResponseQuestion(Question q) {
-		return 0;
-		// TODO Auto-generated method stub
+		DBConnection connection = new DBConnection();
+		
+		int specific_id = connection.insert("INSERT INTO picture_response_questions (question_text) VALUES ('" + q.getQuestion() + "')");
+		return specific_id;
 		
 	}
-	private long insertMultipleChoiceQuestion(Question q) {
-		return 0;
-		// TODO Auto-generated method stub
+	private long insertMultipleChoiceQuestion(MultipleChoiceQuestion q) {
+		DBConnection connection = new DBConnection();
 		
+		int specific_id = connection.insert("INSERT INTO mutiple_choice_questions (question_text) VALUES ('" + q.getQuestion() + "')");
+		
+		ArrayList<String> choices = q.getChoices();
+		for(int i = 0; i < choices.size(); i++) {
+			connection.insert("INSERT INTO multiple_choice_choices (questionID, choice) VALUES (" + q.getId() + ", '" + choices.get(i) + "')");
+		}
+		
+		return specific_id;
 	}
 	private long insertFillInQuestion(Question q) {
-		return 0;
-		// TODO Auto-generated method stub
+		DBConnection connection = new DBConnection();
 		
+		int specific_id = connection.insert("INSERT INTO fill_in_questions (question_text) VALUES ('" + q.getQuestion() + "')");
+		return specific_id;		
 	}
 	private long insertQuestionResponseQuestion(Question q) {
 		DBConnection connection = new DBConnection();

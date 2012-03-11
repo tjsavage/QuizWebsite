@@ -1,5 +1,5 @@
 <fieldset id="<%= request.getParameter("qIndex") %>_block">
-	<legend>Question-Response</legend>
+	<legend>Multiple Choice</legend>
 	<label>Question</label>
 	<input type="hidden" name="<%= request.getParameter("qIndex") %>_type" value="2" />
 	<input type="text" name="<%= request.getParameter("qIndex") %>_question" />

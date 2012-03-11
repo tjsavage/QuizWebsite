@@ -1,9 +1,7 @@
+<%  %>
 <fieldset id="<%= request.getParameter("qIndex") %>_block">
-	<legend>Fill-in-the-Blank Question</legend>
-	<label>Prompt</label>
-	<input type="hidden" name="<%= request.getParameter("qIndex") %>_type" value="1" />
-	
-	<input type="text" name="<%= request.getParameter("qIndex") %>_question" />
+	<legend>Fill-in-the-Blank</legend>
+	<%= %>
 	<fieldset id="<%= request.getParameter("qIndex") %>_answers">
 		<legend>Correct Answers</legend>
 		<input type="text" name="<%= request.getParameter("qIndex") %>_answer_0" />
