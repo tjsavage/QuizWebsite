@@ -63,6 +63,11 @@
 			out.println("</li>");
 		}
 	%>
+	<form method = "get" action = "ChallengeServlet" >
+		<p> 
+			<input type = "submit" value= "View Challenges">
+		</p>
+	</form>
 	<%	 
 		out.print("<a href = \"FriendSearchServlet\"> find friends </a>");
 	%>

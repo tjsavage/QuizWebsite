@@ -42,7 +42,6 @@ public class MessageFactory {
 	}
 	
 	public ArrayList<Message> getSent(int id) {
-		System.out.print(id + '\n');
 		return getMessages(id, "SELECT * FROM messages WHERE friendFromID = ");
 	}
 	
