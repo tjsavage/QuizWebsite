@@ -25,10 +25,6 @@ DROP TABLE IF EXISTS picture_response_questions;
 DROP TABLE IF EXISTS answers;
 USE c_cs108_tjsavage;
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS friends_join;
-DROP TABLE IF EXISTS friend_requests;
-
 CREATE TABLE IF NOT EXISTS users(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
@@ -103,6 +99,7 @@ CREATE TABLE IF NOT EXISTS multiple_choice_questions(
 CREATE TABLE IF NOT EXISTS multiple_choice_choices(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
+	questionID INT UNSIGNED NOT NULL REFERENCES questions(id),
 	choice VARCHAR(60)
 );
 
