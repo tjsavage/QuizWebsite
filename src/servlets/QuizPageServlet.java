@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.User;
-import models.UserAuthentication;
+import models.Quiz;
+import models.QuizFactory;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class QuizPage
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/QuizPage")
+public class QuizPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public QuizPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +31,13 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
-		request.setAttribute("isIncorrect", false);
+		int quizID = Integer.parseInt(request.getParameter("id"));
+		QuizFactory factory = QuizFactory.sharedInstance();
+		Quiz quiz = factory.retrieveQuiz(quizID);
+		
+		request.setAttribute("quiz", quiz);
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher("QuizPage.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -40,22 +45,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		UserAuthentication userAuthentication = new UserAuthentication();
-		RequestDispatcher dispatch;
-		User user = userAuthentication.Authenticate(username, password);
-		if(user != null) {
-			request.getSession().setAttribute("user", user);
-			user.setUsername(username);
-			user.setPassword(password);
-			response.sendRedirect("/QuizWebsite/HomepageServlet");
-		} else {
-			request.setAttribute("isIncorrect", true);
-			dispatch = request.getRequestDispatcher("Login.jsp");
-			dispatch.forward(request, response);
-		}
-		
+		// TODO Auto-generated method stub
 	}
 
 }

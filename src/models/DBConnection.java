@@ -60,4 +60,7 @@ public class DBConnection {
 		return -1;
 	}
 	
+	protected void finalize() throws Throwable {
+		connection.close();
+	}
 }

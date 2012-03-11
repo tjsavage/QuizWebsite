@@ -14,6 +14,22 @@ public class QuizFactory {
 		return sharedInstance;
 	}
 	
+	public ArrayList<Quiz> retrieveAllQuizzes() {
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		DBConnection connection = new DBConnection();
+		ResultSet result = connection.performQuery("SELECT * FROM quizzes");
+		try {
+			while(result.next()) {
+				Quiz currQuiz = getQuizFromResult(result);
+				quizzes.add(currQuiz);
+			}
+			return quizzes;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Quiz retrieveQuiz(int quizID) {
 		String name, description;
 		int creatorID;
@@ -26,20 +42,25 @@ public class QuizFactory {
 		
 		try {
 			result.next();
-			name = result.getString("name");
-			description = result.getString("description");
-			creatorID = result.getInt("creator");
-			ordered = result.getBoolean("ordered");
-			multipage = result.getBoolean("multi_page");
-			dateCreated = result.getDate("date_created");
-			questions = retrieveQuestions(quizID);
-			
-			Quiz quiz = new Quiz(quizID, name, description, creatorID, ordered, questions, multipage, dateCreated);
-			return quiz;
+			return getQuizFromResult(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public Quiz getQuizFromResult(ResultSet result) throws SQLException {
+		int quizID = result.getInt("id");
+		String name = result.getString("name");
+		String description = result.getString("description");
+		int creatorID = result.getInt("creator");
+		boolean ordered = result.getBoolean("ordered");
+		boolean multipage = result.getBoolean("multi_page");
+		Date dateCreated = result.getDate("date_created");
+		ArrayList<Question> questions = retrieveQuestions(quizID);
+		
+		Quiz quiz = new Quiz(quizID, name, description, creatorID, ordered, questions, multipage, dateCreated);
+		return quiz;
 	}
 	
 	private ArrayList<Question> retrieveQuestions(int quizID) {
@@ -51,7 +72,7 @@ public class QuizFactory {
 		
 		try {
 			while(rs.next()) {
-				int questionType = rs.getInt("quiz_type");
+				int questionType = rs.getInt("question_type");
 				int specificID = rs.getInt("specific_questionID");
 				int order_index = rs.getInt("order_index");
 				int questionID = rs.getInt("id");
@@ -74,8 +95,8 @@ public class QuizFactory {
 		DBConnection connection = new DBConnection();
 		
 		int quizID = connection.insert("INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
-										"VALUES ('" + quiz.getName() + "', '" + quiz.getDescription() + "', '"
-										 + quiz.getCreatorID() + "', '" + (quiz.isOrdered() ? 1 : 0) + "', '" + (quiz.isMultipage() ? 1 : 0) + "')");
+										"VALUES ('" + quiz.getName() + "', '" + quiz.getDescription() + "', "
+										 + quiz.getCreatorID() + ", '" + (quiz.isOrdered() ? 1 : 0) + "', '" + (quiz.isMultipage() ? 1 : 0) + "')");
 		quiz.setId(quizID);
 		ArrayList<Question> questions = quiz.getQuestions();
 		QuestionFactory factory = QuestionFactory.sharedInstance();

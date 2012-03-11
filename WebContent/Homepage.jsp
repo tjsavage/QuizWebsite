@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%
-	User user = (User) request.getSession().getAttribute("user");
+	User user = (User) request.getSession(true).getAttribute("user");
 %>
 <title>Homepage</title>
 </head>

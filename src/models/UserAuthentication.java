@@ -9,16 +9,22 @@ public class UserAuthentication {
 		//empty constructor
 	}
 	
-	public boolean Authenticate(String username, String password) {
+	public User Authenticate(String username, String password) {
 		DBConnection connection = new DBConnection();
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = \"" + username + "\"");
 		try {
-			if (rs.next()) return (rs.getString("password").equals(password));
+			if (rs.next()) {
+				if (rs.getString("password").equals(password)) {
+					UserFactory factory = UserFactory.sharedInstance();
+					User user = factory.getUserFromID(rs.getInt("id"));
+					return user;
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
-		return false;
+		return null;
 	}
 	
 	public boolean Register(String username, String password) {

@@ -5,6 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserFactory {
+	private static UserFactory sharedInstance;
+	public static UserFactory sharedInstance() {
+		if (sharedInstance == null) {
+			sharedInstance = new UserFactory();
+		}
+		return sharedInstance;
+	}
 	
 	public UserFactory() {
 		

@@ -49,6 +49,11 @@ public class Quiz {
 		this.multipage = multipage;
 	}
 	
+	public User getCreator() {
+		UserFactory factory = UserFactory.sharedInstance();
+		return factory.getUserFromID(creatorID);
+	}
+	
 	public int getId() {
 		return id;
 	}
