@@ -34,7 +34,6 @@ public class MessageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatch;
-		System.out.print(request.getParameter("id"));
 		int id = Integer.parseInt(request.getParameter("id"));
 		UserFactory uf = new UserFactory();
 		User other = uf.getUserFromID(id);
@@ -55,9 +54,7 @@ public class MessageServlet extends HttpServlet {
 		message.setMessage(request.getParameter("message"));
 		message.setRead(false);
 		mf.sendMessage(message);
-		RequestDispatcher dispatch;
-		dispatch = request.getRequestDispatcher("UserPage.jsp");
-		dispatch.forward(request, response);
+		response.sendRedirect("/QuizWebsite/UserPageServlet");
 	}
 
 }

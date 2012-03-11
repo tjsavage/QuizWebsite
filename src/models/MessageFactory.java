@@ -24,6 +24,25 @@ public class MessageFactory {
 		}
 	}
 	
+	public Message getMessage(int id) {
+		DBConnection connection = new DBConnection();
+		ResultSet rs = connection.performQuery("SELECT * FROM messages WHERE id = " + id);
+		try {
+			if (rs.next()) {
+				Message message = new Message();
+				message.setFromID(rs.getInt("friendFromID"));
+				message.setToID(rs.getInt("friendToID"));
+				message.setMessage(rs.getString("message"));
+				message.setRead(rs.getBoolean("readMark"));
+				message.setID(rs.getInt("id"));
+				return message;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public ArrayList<Message> getSent(int id) {
 		return getMessages(id, "SELECT * FROM messages WHERE friendFromID = ");
 	}
@@ -35,14 +54,15 @@ public class MessageFactory {
 	public ArrayList<Message> getMessages(int id, String query) {
 		ArrayList<Message> messages = new ArrayList<Message>();
 		DBConnection connection = new DBConnection();
-		ResultSet rs = connection.performQuery(query + id);//friends list
+		ResultSet rs = connection.performQuery(query + id);
 		try {
 			while (rs.next()) {
 				Message message = new Message();
 				message.setFromID(rs.getInt("friendFromID"));
-				message.setToID(rs.getInt("firendToID"));
+				message.setToID(rs.getInt("friendToID"));
 				message.setMessage(rs.getString("message"));
 				message.setRead(rs.getBoolean("readMark"));
+				message.setID(rs.getInt("id"));
 				messages.add(message);
 			}
 		} catch (SQLException e) {

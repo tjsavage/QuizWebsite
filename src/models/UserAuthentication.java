@@ -13,12 +13,12 @@ public class UserAuthentication {
 		DBConnection connection = new DBConnection();
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = \"" + username + "\"");
 		try {
-			rs.next();
-			return (rs.getString("password").equals(password));
+			if (rs.next()) return (rs.getString("password").equals(password));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
+		return false;
 	}
 	
 	public boolean Register(String username, String password) {

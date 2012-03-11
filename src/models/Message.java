@@ -2,6 +2,7 @@ package models;
 
 public class Message {
 
+	private int id;
 	private int friendFromID;
 	private int friendToID;
 	private String message;
@@ -41,6 +42,14 @@ public class Message {
 	
 	public int getToID() {
 		return friendToID;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
+	public int getID() {
+		return id;
 	}
 	
 }

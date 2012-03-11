@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Message;
-import models.MessageFactory;
 import models.User;
+import models.MessageFactory;
 import models.UserFactory;
 
 /**
- * Servlet implementation class UserPageServlet
+ * Servlet implementation class ReadMessageServlet
  */
-@WebServlet("/UserPageServlet")
-public class UserPageServlet extends HttpServlet {
+@WebServlet("/ReadMessageServlet")
+public class ReadMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPageServlet() {
+    public ReadMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +34,25 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch;; 
-		UserFactory uf = new UserFactory();
+		int id = Integer.parseInt(request.getParameter("id"));
 		MessageFactory mf = new MessageFactory();
-		User user = (User) request.getSession().getAttribute("user");
-		int id = user.getID();
-		ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
-		ArrayList<User> friendRequests = uf.getFriendRequests(id);
-		ArrayList<User> friends = uf.getFriends(id);
-		ArrayList<Message> inbox = mf.getInbox(id);
-		ArrayList<Message> sent = mf.getSent(id);
-		request.setAttribute("inbox", inbox);
-		request.setAttribute("sent", sent);
-		request.setAttribute("pendingFriends", pendingFriends);
-		request.setAttribute("friendRequests", friendRequests);
-		request.setAttribute("friends", friends);
-		dispatch = request.getRequestDispatcher("UserPage.jsp");
+		UserFactory uf = new UserFactory();
+		Message message = mf.getMessage(id);
+		User other;
+		boolean isInbox;
+		System.out.print(((User)(request.getSession().getAttribute("user"))).getID());
+		System.out.print(message.getFromID());
+		if (((User)(request.getSession().getAttribute("user"))).getID() == message.getFromID()) {
+			other = uf.getUserFromID(message.getToID());
+			isInbox = false;
+		} else {
+			other = uf.getUserFromID(message.getFromID());
+			isInbox = true;
+		}
+		request.setAttribute("message", message);
+		request.setAttribute("other", other);
+		request.setAttribute("isInbox", isInbox);
+		RequestDispatcher dispatch = request.getRequestDispatcher("ReadMessage.jsp");
 		dispatch.forward(request, response);
 	}
 
