@@ -16,7 +16,7 @@ public class User {
 	
 	private void setID() {
 		int id = 0;
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		System.out.print(username);
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = '" + username + "'");
 		try {
@@ -59,7 +59,7 @@ public class User {
 	}
 	
 	public void addFriend(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		connection.insert("INSERT INTO friends_join (friend1ID, friend2ID) values( " + this.id + " , " + id + ")");
 		connection.insert("INSERT INTO friends_join (friend1ID, friend2ID) values( " + id + " , " + this.id + ")");
 		connection.insert("DELETE FROM friend_requests WHERE friendFromID = " + this.id +  "AND friendToID = " + id);
@@ -67,18 +67,18 @@ public class User {
 	}
 	
 	public void removeFriend(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		connection.insert("DELETE FROM friends_join WHERE friend1ID = " + this.id +  "AND friend2ID = " + id);
 		connection.insert("DELETE FROM friends_join WHERE friend1ID = " + id + " AND friend2ID = " + this.id);
 	}
 	
 	public void sendFriendRequest(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		connection.insert("INSERT INTO friend_requests (friendFromID, friendToID) values( " + this.id + " , " + id + ")");
 	}
 	
 	public boolean isFriend(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery(" SELECT * FROM friends_join WHERE friend1ID = " + this.id + " AND friend2ID = " + id);
 		try {
 			return (rs.next());
@@ -89,7 +89,7 @@ public class User {
 	}
 	
 	public boolean isWaiting(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery(" SELECT * FROM friend_requests WHERE friendFromID = " + this.id + " AND friendToID = " + id);
 		try {
 			return (rs.next());

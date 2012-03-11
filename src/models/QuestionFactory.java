@@ -29,7 +29,7 @@ public class QuestionFactory {
 	}
 	
 	private ArrayList<String> retrieveAnswers(int questionID) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery("SELECT * FROM answers WHERE questionID=" + questionID);
 		ArrayList<String> answers = new ArrayList<String>();
 		
@@ -45,7 +45,7 @@ public class QuestionFactory {
 	
 	private Question retrievePictureResponseQuestion(int questionID,
 			int specificID) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		
 		ResultSet rs = connection.performQuery("SELECT * FROM picture_response_questions WHERE id=" + specificID);
 		String question_text = "";
@@ -64,7 +64,7 @@ public class QuestionFactory {
 	}
 	private Question retrieveMultipleChoiceQuestion(int questionID,
 			int specificID) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		
 		ResultSet rs = connection.performQuery("SELECT * FROM multiple_choice_questions WHERE id=" + specificID);
 		String question_text = "";
@@ -94,7 +94,7 @@ public class QuestionFactory {
 		return question;
 	}
 	private FillInQuestion retrieveFillInQuestion(int questionID, int specificID) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		
 		ResultSet rs = connection.performQuery("SELECT * FROM fill_in_questions WHERE id=" + specificID);
 		String question_text = "";
@@ -112,7 +112,7 @@ public class QuestionFactory {
 		return question;
 	}
 	private QuestionResponseQuestion retrieveQuestionResponseQuestion(int questionID, int specificID) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		
 		ResultSet rs = connection.performQuery("SELECT * FROM question_response_questions WHERE id=" + specificID);
 		String question_text = "";
@@ -149,7 +149,7 @@ public class QuestionFactory {
 			specificID = -1;
 		}
 		if (specificID != -1) {
-			DBConnection connection = new DBConnection();
+			DBConnection connection = DBConnection.sharedInstance();
 			
 			int id;
 			try {
@@ -166,14 +166,14 @@ public class QuestionFactory {
 		}
 	}
 	private long insertPictureResponseQuestion(Question q) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		
 		int specific_id = connection.insert("INSERT INTO picture_response_questions (question_text) VALUES ('" + q.getQuestion() + "')");
 		return specific_id;
 		
 	}
 	private long insertMultipleChoiceQuestion(MultipleChoiceQuestion q) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		
 		int specific_id = connection.insert("INSERT INTO multiple_choice_questions (question_text) VALUES ('" + q.getQuestion() + "')");
 		
@@ -185,13 +185,13 @@ public class QuestionFactory {
 		return specific_id;
 	}
 	private long insertFillInQuestion(Question q) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		
 		int specific_id = connection.insert("INSERT INTO fill_in_questions (question_text) VALUES ('" + q.getQuestion() + "')");
 		return specific_id;		
 	}
 	private long insertQuestionResponseQuestion(Question q) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection =DBConnection.sharedInstance();
 		
 		int specific_id = connection.insert("INSERT INTO question_response_questions (question_text) VALUES ('" + q.getQuestion() + "')");
 		return specific_id;

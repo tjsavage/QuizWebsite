@@ -40,8 +40,8 @@ public class ReadMessageServlet extends HttpServlet {
 		Message message = mf.getMessage(id);
 		User other;
 		boolean isInbox;
-		System.out.print(((User)(request.getSession().getAttribute("user"))).getID());
-		System.out.print(message.getFromID());
+//		System.out.print(((User)(request.getSession().getAttribute("user"))).getID());
+//		System.out.print(message.getFromID());
 		if (((User)(request.getSession().getAttribute("user"))).getID() == message.getFromID()) {
 			other = uf.getUserFromID(message.getToID());
 			isInbox = false;

@@ -11,7 +11,7 @@ public class MessageFactory {
 	}
 	
 	public void sendMessage(Message message) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		int bool = 0;
 		if (message.getRead()) bool = 1;
 		try {
@@ -23,7 +23,7 @@ public class MessageFactory {
 	}
 	
 	public Message getMessage(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery("SELECT * FROM messages WHERE id = " + id);
 		try {
 			if (rs.next()) {
@@ -52,7 +52,7 @@ public class MessageFactory {
 	
 	public ArrayList<Message> getMessages(int id, String query) {
 		ArrayList<Message> messages = new ArrayList<Message>();
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery(query + id);
 		try {
 			while (rs.next()) {

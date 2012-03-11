@@ -14,7 +14,16 @@ public class DBConnection {
 	
 	private Connection connection;
 		
-	public DBConnection() {
+	public static DBConnection sharedInstance;
+	public static DBConnection sharedInstance() {
+		if (sharedInstance == null) {
+			sharedInstance = new DBConnection();
+		}
+		
+		return sharedInstance;
+	}
+	
+	private DBConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
