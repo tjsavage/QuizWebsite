@@ -78,9 +78,9 @@ public class QuizFactory {
 										 + quiz.getCreatorID() + "', '" + (quiz.isOrdered() ? 1 : 0) + "', '" + (quiz.isMultipage() ? 1 : 0) + "')");
 		quiz.setId(quizID);
 		ArrayList<Question> questions = quiz.getQuestions();
+		QuestionFactory factory = QuestionFactory.sharedInstance();
 		for(int i = 0; i < questions.size(); i++) {
 			Question q = questions.get(i);
-			QuestionFactory factory = QuestionFactory.sharedInstance();
 			q.setQuizID(quizID);
 			q.setOrderIndex(i);
 			factory.insertQuestion(q);

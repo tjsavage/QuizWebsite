@@ -1,5 +1,30 @@
 USE c_cs108_tjsavage;
 
+DROP TABLE IF EXISTS users;
+
+DROP TABLE IF EXISTS friends_join;
+
+DROP TABLE IF EXISTS friend_requests;
+
+DROP TABLE IF EXISTS messages;
+
+DROP TABLE IF EXISTS quizzes;
+
+DROP TABLE IF EXISTS questions;
+
+DROP TABLE IF EXISTS question_response_questions;
+
+DROP TABLE IF EXISTS fill_in_questions;
+
+DROP TABLE IF EXISTS multiple_choice_questions;
+
+DROP TABLE IF EXISTS multiple_choice_choices;
+
+DROP TABLE IF EXISTS picture_response_questions;
+
+DROP TABLE IF EXISTS answers;
+USE c_cs108_tjsavage;
+
 CREATE TABLE IF NOT EXISTS users(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
@@ -74,7 +99,7 @@ CREATE TABLE IF NOT EXISTS multiple_choice_questions(
 CREATE TABLE IF NOT EXISTS multiple_choice_choices(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	specific_questionID INT UNSIGNED NOT NULL REFERENCES multiple_choice_questions(id),
+	questionID INT UNSIGNED NOT NULL REFERENCES questions(id),
 	choice VARCHAR(60)
 );
 

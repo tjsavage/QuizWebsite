@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.FillInQuestion;
+import models.MultipleChoiceQuestion;
+import models.PictureResponseQuestion;
 import models.Question;
 import models.QuestionResponseQuestion;
 import models.Quiz;
@@ -51,12 +54,22 @@ public class CreateQuizServlet extends HttpServlet {
 		
 		int numQuestions = Integer.parseInt(request.getParameter("num_questions"));
 		ArrayList<Question> questions = new ArrayList<Question>();
+		System.out.println("Num questions: " + numQuestions);
 		for(int i = 0; i < numQuestions; i++) {
 			int type = Integer.parseInt(request.getParameter("" + i + "_type"));
 			Question currQuestion;
 			switch (type) {
 			case 0:
 				currQuestion = parseQuestionResponseQuestion(request, i);
+				break;
+			case 1:
+				currQuestion = parseFillInQuestion(request, i);
+				break;
+			case 2:
+				currQuestion = parseMultipleChoiceQuestion(request, i);
+				break;
+			case 3:
+				currQuestion = parsePictureResponseQuestion(request, i);
 				break;
 			default:
 				currQuestion = null;
@@ -71,6 +84,47 @@ public class CreateQuizServlet extends HttpServlet {
 		factory.insertQuiz(quiz);
 	}
 	
+	private PictureResponseQuestion parsePictureResponseQuestion(HttpServletRequest request,
+			int index) {
+		ArrayList<String> answers = new ArrayList<String>();
+		String questionString = request.getParameter("" + index + "_question");
+		int numAnswers = Integer.parseInt(request.getParameter("" + index + "_num_answers"));
+		for(int i = 0; i < numAnswers; i++) {
+			String answer = request.getParameter("" + index + "_answer_" + i);
+			if (answer.length() > 0) {
+				answers.add(answer);
+			}
+		}
+		
+		PictureResponseQuestion question = new PictureResponseQuestion(questionString, answers);
+		return question;
+	}
+
+	private MultipleChoiceQuestion parseMultipleChoiceQuestion(HttpServletRequest request,
+			int index) {
+		ArrayList<String> answers = new ArrayList<String>();
+		String questionString = request.getParameter("" + index + "_question");
+		int numAnswers = Integer.parseInt(request.getParameter("" + index + "_num_answers"));
+		for(int i = 0; i < numAnswers; i++) {
+			String answer = request.getParameter("" + index + "_answer_" + i);
+			if (answer.length() > 0) {
+				answers.add(answer);
+			}
+		}
+		
+		int numChoices = Integer.parseInt(request.getParameter("" + index + "_num_choices"));
+		ArrayList<String> choices = new ArrayList<String>();
+		for(int i = 0; i < numChoices; i++) {
+			String choice = request.getParameter("" + index + "_choice_" + i);
+			if (choice.length() > 0) {
+				choices.add(choice);
+			}
+		}
+		
+		MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionString, choices, answers.get(0));
+		return question;
+	}
+
 	private QuestionResponseQuestion parseQuestionResponseQuestion(HttpServletRequest request, int index) {
 		ArrayList<String> answers = new ArrayList<String>();
 		String questionString = request.getParameter("" + index + "_question");
@@ -83,6 +137,21 @@ public class CreateQuizServlet extends HttpServlet {
 		}
 		
 		QuestionResponseQuestion question = new QuestionResponseQuestion(questionString, answers);
+		return question;
+	}
+	
+	private FillInQuestion parseFillInQuestion(HttpServletRequest request, int index) {
+		ArrayList<String> answers = new ArrayList<String>();
+		String questionString = request.getParameter("" + index + "_question");
+		int numAnswers = Integer.parseInt(request.getParameter("" + index + "_num_answers"));
+		for(int i = 0; i < numAnswers; i++) {
+			String answer = request.getParameter("" + index + "_answer_" + i);
+			if (answer.length() > 0) {
+				answers.add(answer);
+			}
+		}
+		
+		FillInQuestion question = new FillInQuestion(questionString, answers);
 		return question;
 	}
 
