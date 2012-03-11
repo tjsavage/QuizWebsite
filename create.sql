@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS multiple_choice_questions(
 CREATE TABLE IF NOT EXISTS multiple_choice_choices(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(id),
-	questionID INT UNSIGNED NOT NULL REFERENCES questions(id),
+	specific_questionID INT UNSIGNED NOT NULL REFERENCES multiple_choice_questions(id),
 	choice VARCHAR(60)
 );
 

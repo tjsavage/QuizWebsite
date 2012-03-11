@@ -76,7 +76,7 @@ public class QuestionFactory {
 			e.printStackTrace();
 		}
 		
-		rs = connection.performQuery("SELECT * FROM multiple_choice_choices WHERE questionID=" + questionID);
+		rs = connection.performQuery("SELECT * FROM multiple_choice_choices WHERE specific_questionID=" + specificID);
 		ArrayList<String> choices = new ArrayList<String>();
 		
 		try {
@@ -175,11 +175,11 @@ public class QuestionFactory {
 	private long insertMultipleChoiceQuestion(MultipleChoiceQuestion q) {
 		DBConnection connection = new DBConnection();
 		
-		int specific_id = connection.insert("INSERT INTO mutiple_choice_questions (question_text) VALUES ('" + q.getQuestion() + "')");
+		int specific_id = connection.insert("INSERT INTO multiple_choice_questions (question_text) VALUES ('" + q.getQuestion() + "')");
 		
 		ArrayList<String> choices = q.getChoices();
 		for(int i = 0; i < choices.size(); i++) {
-			connection.insert("INSERT INTO multiple_choice_choices (questionID, choice) VALUES (" + q.getId() + ", '" + choices.get(i) + "')");
+			connection.insert("INSERT INTO multiple_choice_choices (specific_questionID, choice) VALUES (" + specific_id + ", '" + choices.get(i) + "')");
 		}
 		
 		return specific_id;
