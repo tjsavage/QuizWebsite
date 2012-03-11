@@ -17,7 +17,8 @@ public class User {
 	private void setID() {
 		int id = 0;
 		DBConnection connection = new DBConnection();
-		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = \"" + username + "\"");
+		System.out.print(username);
+		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = '" + username + "'");
 		try {
 			if (rs.next()) {
 				id = rs.getInt("id");

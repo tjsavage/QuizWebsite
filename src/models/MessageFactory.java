@@ -15,8 +15,6 @@ public class MessageFactory {
 		int bool = 0;
 		if (message.getRead()) bool = 1;
 		try {
-			System.out.print("INSERT INTO messages (friendFromID, friendToID, message, readMark) " +
-						"values(" + message.getFromID() + " , " + message.getToID() + " , '" + message.getMessage() + "' , " + bool + " )");
 				connection.insert ("INSERT INTO messages (friendFromID, friendToID, message, readMark) " +
 						"values(" + message.getFromID() + " , " + message.getToID() + " , '" + message.getMessage() + "' , " + bool + " )");
 		} catch (Exception e) {
@@ -44,6 +42,7 @@ public class MessageFactory {
 	}
 	
 	public ArrayList<Message> getSent(int id) {
+		System.out.print(id + '\n');
 		return getMessages(id, "SELECT * FROM messages WHERE friendFromID = ");
 	}
 	

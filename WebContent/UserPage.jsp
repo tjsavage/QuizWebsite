@@ -27,6 +27,16 @@
 			out.println("</li>");
 		}
 	%>
+	<p> sent: </p>
+	<%
+		ArrayList<Message> sent = (ArrayList<Message>) request.getAttribute("sent");
+		for (int i = 0; i < sent.size(); i++) {
+			out.print("<li>");
+			out.print("<a href = \"OtherUserServlet?id=" + sent.get(i).getToID() + "\">" + uf.getUserFromID(sent.get(i).getToID()).getUsername() + "</a>");
+			out.print("<a href='ReadMessageServlet?id=" + sent.get(i).getID() + "'> Read Message</a>");
+			out.println("</li>");
+		}
+	%>
 	<p> friends: </p>
 	<%
 		ArrayList<User> friends = (ArrayList<User>) request.getAttribute("friends");

@@ -16,8 +16,8 @@
 	<form method = "post" action = "MessageServlet" >
 		your message:<BR>
 		<TEXTAREA NAME="message" COLS=40 ROWS=6></TEXTAREA>
-		<input type = hidden name = id value = <%= other.getID() %> >
-		<P><INPUT TYPE=SUBMIT VALUE="send">
+		<input type = "hidden" name = "id" value = "<%= other.getID() %>" >
+		<P><INPUT TYPE="SUBMIT" VALUE="send">
 	</FORM>
 </body>
 </html>
