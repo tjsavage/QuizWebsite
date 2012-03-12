@@ -22,7 +22,7 @@ public class UserFactory {
 	}
 	
 	public ArrayList<User> getPendingFriendRequests(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ArrayList<User> users = new ArrayList<User>();
 		ResultSet rs = connection.performQuery(" SELECT * FROM friend_requests WHERE friendFromID = " + id);
 		try {
@@ -37,7 +37,7 @@ public class UserFactory {
 	}
 	
 	public ArrayList<User> getFriendRequests(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ArrayList<User> users = new ArrayList<User>();
 		ResultSet rs = connection.performQuery(" SELECT * FROM friend_requests WHERE friendToID = " + id);
 		try {
@@ -52,7 +52,7 @@ public class UserFactory {
 	}
 	
 	public ArrayList<User> getFriends(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ArrayList<User> users = new ArrayList<User>();
 		ResultSet rs = connection.performQuery(" SELECT * FROM friends_join WHERE friend1ID = " + id);
 		try {
@@ -68,7 +68,7 @@ public class UserFactory {
 	
 	private ArrayList<User> getUsers(int id, String query) {
 		ArrayList<User> users = new ArrayList<User>();
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery(query + id);//friends list
 		try {
 			while (rs.next()) {
@@ -85,7 +85,7 @@ public class UserFactory {
 	}
 	
 	public User getUserFromID(int id) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE id = " + id);
 		User user = new User(false);;
 		try {

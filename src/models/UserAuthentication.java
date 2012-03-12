@@ -10,7 +10,7 @@ public class UserAuthentication {
 	}
 	
 	public User Authenticate(String username, String password) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = \"" + username + "\"");
 		try {
 			if (rs.next()) {
@@ -28,7 +28,7 @@ public class UserAuthentication {
 	}
 	
 	public boolean Register(String username, String password) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = \"" + username + "\"");
 		try {
 			if (!rs.next()) {

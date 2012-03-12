@@ -16,7 +16,7 @@ public class QuizFactory {
 	
 	public ArrayList<Quiz> retrieveAllQuizzes() {
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet result = connection.performQuery("SELECT * FROM quizzes");
 		try {
 			while(result.next()) {
@@ -31,7 +31,13 @@ public class QuizFactory {
 	}
 	
 	public Quiz retrieveQuiz(int quizID) {
-		DBConnection connection = new DBConnection();
+		String name, description;
+		int creatorID;
+		boolean ordered, multipage;
+		Date dateCreated;
+		ArrayList<Question> questions = new ArrayList<Question>();
+		
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet result = connection.performQuery("SELECT * FROM quizzes WHERE id=" + quizID);
 		
 		try {
@@ -63,7 +69,7 @@ public class QuizFactory {
 	private ArrayList<Question> retrieveQuestions(int quizID) {
 		ArrayList<Question> questions = new ArrayList<Question>();
 		
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery("SELECT * FROM questions WHERE quizID=" + quizID);
 		QuestionFactory qf = QuestionFactory.sharedInstance();
 		
@@ -89,7 +95,7 @@ public class QuizFactory {
 	}
 	
 	public void insertQuiz(Quiz quiz) {
-		DBConnection connection = new DBConnection();
+		DBConnection connection = DBConnection.sharedInstance();
 		
 		int quizID = connection.insert("INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
 										"VALUES ('" + quiz.getName() + "', '" + quiz.getDescription() + "', "
