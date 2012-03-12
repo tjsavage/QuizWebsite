@@ -14,23 +14,12 @@ public class User {
 		this.isLoggedIn = isLoggedIn;
 	}
 	
-	private void setID() {
-		int id = 0;
-		DBConnection connection = new DBConnection();
-		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = \"" + username + "\"");
-		try {
-			if (rs.next()) {
-				id = rs.getInt("id");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void setID(int id) {
 		this.id = id;
 	}
 	
 	public void setUsername(String username) {
 		this.username = username;
-		setID();
 	}
 	
 	public void setPassword(String password) {

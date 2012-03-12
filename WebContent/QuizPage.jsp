@@ -8,11 +8,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title><%= quiz.getName() %></title>
+<title><%= quiz != null? quiz.getName() : "Invalid Quiz"  %></title>
 </head>
 <body>
+<% if (quiz == null) { %>
+<h1>Invalid Quiz</h1>
+<% } else { %>
 <h1><%= quiz.getName() %><small>Created by <a href="UserPageServlet?id=<%= quiz.getCreatorID() %>"><%= quiz.getCreator().getUsername() %></a></small></h1>
 <p><%= quiz.getDescription() %></p>
 <a href="TakeQuizServlet?id=<%= quiz.getId() %>">Take Quiz</a>
+<% } %>
 </body>
 </html>

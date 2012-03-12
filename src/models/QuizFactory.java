@@ -31,18 +31,15 @@ public class QuizFactory {
 	}
 	
 	public Quiz retrieveQuiz(int quizID) {
-		String name, description;
-		int creatorID;
-		boolean ordered, multipage;
-		Date dateCreated;
-		ArrayList<Question> questions = new ArrayList<Question>();
-		
 		DBConnection connection = new DBConnection();
 		ResultSet result = connection.performQuery("SELECT * FROM quizzes WHERE id=" + quizID);
 		
 		try {
-			result.next();
-			return getQuizFromResult(result);
+			if (result.next()) {;
+				return getQuizFromResult(result);
+			} else {
+				return null;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
