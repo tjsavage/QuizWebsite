@@ -17,6 +17,11 @@ public class QuizResult {
 		this.dateTaken = dateTaken;
 	}
 	
+	public User getUser() {
+		UserFactory uf = UserFactory.sharedInstance();
+		return uf.getUserFromID(userID);
+	}
+	
 	public int getQuizID() {
 		return quizID;
 	}

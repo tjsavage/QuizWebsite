@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS quizzes(
 	creator INT UNSIGNED NOT NULL REFERENCES users(id),
 	ordered BOOLEAN,
 	multi_page BOOLEAN,
+	immediate_correction BOOLEAN DEFAULT false,
 	date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

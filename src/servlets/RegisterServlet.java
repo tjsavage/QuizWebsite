@@ -43,10 +43,9 @@ public class RegisterServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		UserAuthentication userAuthentication = new UserAuthentication();
-		if (userAuthentication.Register(username, password)) {
-			User user = (User) request.getSession().getAttribute("user");
-			user.setUsername(username);
-			user.setPassword(password);
+		User user = userAuthentication.Register(username, password);
+		if (user != null) {
+			request.getSession().setAttribute("user", user);
 			response.sendRedirect("/QuizWebsite/HomepageServlet");
 		} else {
 			RequestDispatcher dispatch; 

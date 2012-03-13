@@ -47,8 +47,6 @@ public class LoginServlet extends HttpServlet {
 		User user = userAuthentication.Authenticate(username, password);
 		if(user != null) {
 			request.getSession().setAttribute("user", user);
-			user.setUsername(username);
-			user.setPassword(password);
 			response.sendRedirect("/QuizWebsite/HomepageServlet");
 		} else {
 			request.setAttribute("isIncorrect", true);

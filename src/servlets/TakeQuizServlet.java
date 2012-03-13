@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -43,8 +44,6 @@ public class TakeQuizServlet extends HttpServlet {
 		request.setAttribute("quiz", quiz);
 		
 		if (quiz.isMultipage()) {
-			int questionIndex = Integer.parseInt(request.getParameter("question"));
-			request.setAttribute("question", quiz.getQuestion(questionIndex));
 			RequestDispatcher dispatch = request.getRequestDispatcher("SingleQuestion.jsp");
 			dispatch.forward(request, response);
 		} else {
@@ -68,11 +67,16 @@ public class TakeQuizServlet extends HttpServlet {
 		QuestionFactory questionFactory = QuestionFactory.sharedInstance();
 		int score = 0;
 		
+		ArrayList<String> yourAnswers = new ArrayList<String>();
+		ArrayList<String> acceptableAnswers = new ArrayList<String>();
+		
 		for(int i = 0; i < quiz.getQuestions().size(); i++) {
 			int questionID = Integer.parseInt(request.getParameter("" + i + "_id"));
 			try {
 				Question q = questionFactory.retrieveQuestion(questionID);
 				String answer = request.getParameter("" + i + "_answer");
+				yourAnswers.add(answer);
+				acceptableAnswers.add(q.getAnswerString());
 				if (q.isCorrectAnswer(answer)) {
 					score += 1;
 				}
@@ -87,7 +91,9 @@ public class TakeQuizServlet extends HttpServlet {
 		qrf.insertQuizResult(result);
 		
 		request.setAttribute("quiz", quiz);
-		request.setAttribute("quizResult", qrf);
+		request.setAttribute("quizResult", result);
+		request.setAttribute("yourAnswers", yourAnswers);
+		request.setAttribute("acceptableAnswers", acceptableAnswers);
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("QuizResult.jsp");
 		dispatch.forward(request, response);

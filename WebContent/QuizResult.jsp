@@ -18,5 +18,13 @@
 <body>
 <h1>Results for <%= quiz.getName() %></h1>
 <p>You got <%= result.getScore() %> out of <%= quiz.getQuestions().size() %></p>
+<ol>
+<% 
+ArrayList<String> yourAnswers = (ArrayList<String>)request.getAttribute("yourAnswers");
+ArrayList<String> acceptableAnswers = (ArrayList<String>)request.getAttribute("acceptableAnswers");
+for(int i = 0; i < yourAnswers.size(); i++) { %>
+	<li>Your answers: <%= yourAnswers.get(i) %>, Correct Answer(s): <%= acceptableAnswers.get(i) %></li>
+<% } %>
+</ol>
 </body>
 </html>

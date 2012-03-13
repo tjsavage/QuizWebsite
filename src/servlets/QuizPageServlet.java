@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Quiz;
 import models.QuizFactory;
+import models.QuizResult;
+import models.QuizResultFactory;
 
 /**
  * Servlet implementation class QuizPage
@@ -35,7 +38,12 @@ public class QuizPageServlet extends HttpServlet {
 		QuizFactory factory = QuizFactory.sharedInstance();
 		Quiz quiz = factory.retrieveQuiz(quizID);
 		
+		QuizResultFactory resultFactory = QuizResultFactory.sharedInstance();
+		ArrayList<QuizResult> quizResultsByDate = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.DATE);
+		ArrayList<QuizResult> quizResultsByScore = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.SCORE);
 		request.setAttribute("quiz", quiz);
+		request.setAttribute("quizResultsByDate", quizResultsByDate);
+		request.setAttribute("quizResultsByScore", quizResultsByScore);
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("QuizPage.jsp");
 		dispatch.forward(request, response);

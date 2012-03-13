@@ -22,10 +22,6 @@ public class MultipleChoiceQuestion extends Question {
 		this.type = Question.QuestionType.MULTIPLE_CHOICE;
 	}
 	
-	public boolean isCorrectAnswer(String answer) {
-		return correctAnswers.contains(answer);
-	}
-	
 	public String getAnswerString() {
 		String answer = correctAnswers.get(0);
 		for(int i = 1; i < correctAnswers.size(); i++) {
