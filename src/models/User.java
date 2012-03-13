@@ -14,8 +14,9 @@ public class User {
 		this.isLoggedIn = isLoggedIn;
 	}
 	
-	private void setID() {
-		int id = 0;
+	public void setID(int id) {
+		// Trying to keep this simple/obvious
+		/* int id = 0;
 		DBConnection connection = DBConnection.sharedInstance();
 		System.out.print(username);
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = '" + username + "'");
@@ -25,7 +26,7 @@ public class User {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} */
 		this.id = id;
 	}
 	

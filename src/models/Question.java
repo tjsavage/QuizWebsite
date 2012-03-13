@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import models.Question.QuestionType;
 
 public class Question {
-	enum QuestionType {
+	public enum QuestionType {
 		QUESTION_RESPONSE,
 		FILL_IN,
 		MULTIPLE_CHOICE,

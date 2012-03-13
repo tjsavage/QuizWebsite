@@ -16,7 +16,7 @@
 <% } else { %>
 <h1><%= quiz.getName() %><small>Created by <a href="UserPageServlet?id=<%= quiz.getCreatorID() %>"><%= quiz.getCreator().getUsername() %></a></small></h1>
 <p><%= quiz.getDescription() %></p>
-<a href="TakeQuizServlet?id=<%= quiz.getId() %>">Take Quiz</a>
+<a href="TakeQuizServlet?id=<%= quiz.getId() %>&question=0">Take Quiz</a>
 <% } %>
 </body>
 </html>

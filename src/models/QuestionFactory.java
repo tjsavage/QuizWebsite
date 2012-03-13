@@ -59,7 +59,7 @@ public class QuestionFactory {
 		
 		ArrayList<String> answers = retrieveAnswers(questionID);
 		
-		FillInQuestion question = new FillInQuestion(questionID, question_text, answers);
+		PictureResponseQuestion question = new PictureResponseQuestion(questionID, question_text, answers);
 		return question;
 	}
 	private Question retrieveMultipleChoiceQuestion(int questionID,
