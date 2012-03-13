@@ -13,6 +13,24 @@ public class QuestionFactory {
 		
 		return sharedInstance;
 	}
+	
+	public Question retrieveQuestion(int questionID) throws Exception {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT * FROM questions WHERE id=" + questionID);
+		
+		try {
+			if (rs.next()) {
+				int questionType = rs.getInt("question_type");
+				int specificID = rs.getInt("specific_questionID");
+				
+				return retrieveQuestion(questionID, Question.QuestionType(questionType), specificID);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Question retrieveQuestion(int questionID, Question.QuestionType questionType, int specificID) {
 		switch (questionType) {
 		case QUESTION_RESPONSE:
@@ -59,7 +77,7 @@ public class QuestionFactory {
 		
 		ArrayList<String> answers = retrieveAnswers(questionID);
 		
-		FillInQuestion question = new FillInQuestion(questionID, question_text, answers);
+		PictureResponseQuestion question = new PictureResponseQuestion(questionID, question_text, answers);
 		return question;
 	}
 	private Question retrieveMultipleChoiceQuestion(int questionID,

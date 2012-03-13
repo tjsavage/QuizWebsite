@@ -16,10 +16,6 @@ public class PictureResponseQuestion extends Question {
 		this.type = Question.QuestionType.PICTURE_RESPONSE;
 	}
 	
-	public boolean isCorrectAnswer(String answer) {
-		return correctAnswers.contains(answer);
-	}
-	
 	public String getAnswerString() {
 		String answer = correctAnswers.get(0);
 		for(String str : correctAnswers) {

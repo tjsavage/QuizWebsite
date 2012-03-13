@@ -117,5 +117,17 @@ public class Quiz {
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
+
+	public String getSafeName() {
+		return this.name.replaceAll("'", "\\'");
+	}
+	
+	public String getSafeDescription() {
+		return this.description.replaceAll("'", "\\'");
+	}
+
+	public Question getQuestion(int questionIndex) {
+		return questions.get(questionIndex);
+	}
 	
 }

@@ -41,8 +41,11 @@ public class QuizFactory {
 		ResultSet result = connection.performQuery("SELECT * FROM quizzes WHERE id=" + quizID);
 		
 		try {
-			result.next();
-			return getQuizFromResult(result);
+			if (result.next()) {;
+				return getQuizFromResult(result);
+			} else {
+				return null;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -93,10 +96,12 @@ public class QuizFactory {
 	
 	public void insertQuiz(Quiz quiz) {
 		DBConnection connection = DBConnection.sharedInstance();
+		String queryString = "INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
+				"VALUES ('" + quiz.getSafeName() + "', '" + quiz.getSafeDescription() + "', "
+				 + quiz.getCreatorID() + ", " + (quiz.isOrdered() ? 1 : 0) + ", " + (quiz.isMultipage() ? 1 : 0) + ")";
+		System.out.println(queryString);
 		
-		int quizID = connection.insert("INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
-										"VALUES ('" + quiz.getName() + "', '" + quiz.getDescription() + "', "
-										 + quiz.getCreatorID() + ", '" + (quiz.isOrdered() ? 1 : 0) + "', '" + (quiz.isMultipage() ? 1 : 0) + "')");
+		int quizID = connection.insert(queryString);
 		quiz.setId(quizID);
 		ArrayList<Question> questions = quiz.getQuestions();
 		QuestionFactory factory = QuestionFactory.sharedInstance();

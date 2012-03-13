@@ -92,6 +92,7 @@ public class UserFactory {
 			rs.next();
 			user.setUsername(rs.getString("username"));
 			user.setPassword(rs.getString("password"));
+			user.setID(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

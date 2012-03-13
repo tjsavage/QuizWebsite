@@ -48,8 +48,10 @@ public class CreateQuizServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
-		boolean ordered = Boolean.parseBoolean(request.getParameter("ordered"));
-		boolean multi_page = Boolean.parseBoolean(request.getParameter("multi_page"));
+		boolean ordered = request.getParameter("ordered").equals("on");
+		boolean multi_page = request.getParameter("multi_page").equals("on");
+		System.out.println(multi_page);
+		System.out.println(request.getParameter("multi_page"));
 		User user = (User) request.getSession().getAttribute("user");
 		
 		int numQuestions = Integer.parseInt(request.getParameter("num_questions"));

@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS quizzes(
 	creator INT UNSIGNED NOT NULL REFERENCES users(id),
 	ordered BOOLEAN,
 	multi_page BOOLEAN,
+	immediate_correction BOOLEAN DEFAULT false,
 	date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -99,4 +100,14 @@ CREATE TABLE IF NOT EXISTS answers(
 	PRIMARY KEY(id),
 	questionID INT UNSIGNED NOT NULL REFERENCES questions(id),
 	answer VARCHAR(60)
+);
+
+CREATE TABLE IF NOT EXISTS quiz_results(
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(id),
+	quizID INT UNSIGNED NOT NULL REFERENCES quizzes(id),
+	userID INT UNSIGNED NOT NULL REFERENCES users(id),
+	score INT,
+	completion_time INT,
+	date_taken TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

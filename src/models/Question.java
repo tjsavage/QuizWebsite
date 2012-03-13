@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import models.Question.QuestionType;
 
 public class Question {
-	enum QuestionType {
+	public enum QuestionType {
 		QUESTION_RESPONSE,
 		FILL_IN,
 		MULTIPLE_CHOICE,
@@ -27,8 +27,8 @@ public class Question {
 		return this.correctAnswers;
 	}
 	
-	public boolean isCorrectAnswer(Object answer) {
-		return false;
+	public boolean isCorrectAnswer(String answer) {
+		return correctAnswers.contains(answer);
 	}
 
 	public String getQuestion() {

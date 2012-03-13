@@ -27,18 +27,19 @@ public class UserAuthentication {
 		return null;
 	}
 	
-	public boolean Register(String username, String password) {
+	public User Register(String username, String password) {
 		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = \"" + username + "\"");
 		try {
 			if (!rs.next()) {
-				connection.insert("insert into users (username, password, isAdmin) values( \"" + username + "\" , \"" + password + "\", 0)");
-				return true;
+				long userID = connection.insert("insert into users (username, password, isAdmin) values( \"" + username + "\" , \"" + password + "\", 0)");
+				UserFactory uf = UserFactory.sharedInstance();
+				return uf.getUserFromID((int)userID);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 	
 }
