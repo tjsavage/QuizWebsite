@@ -4,6 +4,7 @@
 <%@ page import="models.Quiz" %>
 <%@ page import="models.Question" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Date" %>
 
 <% Quiz quiz = (Quiz)request.getAttribute("quiz"); 
 %>
@@ -16,6 +17,7 @@
 <body>
 <h1><%= quiz.getName() %></h1>
 <form method="POST">
+<input type="hidden" name="start_time" value="<%= new Date().getTime() %>" />
 <% 
 ArrayList<Question> questions = quiz.getQuestions();
 for(int index = 0; index < questions.size(); index++) { 

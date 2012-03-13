@@ -3,7 +3,7 @@
 <%@ page import="models.Quiz" %>
 <%@ page import="models.Question" %>
 <%@ page import="java.util.ArrayList" %>
-<%= question.getTypeInt() %>
+	<input type="hidden" name="<%= index %>_id" value="<%= question.getId() %>" />
     <%
     switch (question.getTypeInt()) {
     case 0:
