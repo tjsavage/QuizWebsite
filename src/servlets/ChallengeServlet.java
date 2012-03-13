@@ -1,12 +1,17 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Challenge;
+import models.ChallengeFactory;
 import models.User;
 
 /**
@@ -29,7 +34,12 @@ public class ChallengeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
-		
+		ArrayList<Challenge> challenges = new ArrayList<Challenge>();
+		ChallengeFactory cf = new ChallengeFactory();
+		challenges = cf.getInbox(user.getID());
+		request.setAttribute("challenges", challenges);
+		RequestDispatcher dispatch = request.getRequestDispatcher("ReadChallenges.jsp");
+		dispatch.forward(request, response);
 	}
 
 	/**
