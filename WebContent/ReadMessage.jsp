@@ -13,8 +13,15 @@
 	boolean isInbox = (Boolean) request.getAttribute("isInbox");
 %>
 <title>Readin N' Stuff</title>
+
+<jsp:include page="HeaderInclude.jsp" />
+
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+	<div class="wrapper">
 	<h1>
 	<%
 		if (isInbox) out.print("Sent from " + other.getUsername() + ":");
@@ -33,5 +40,7 @@
 			out.print("<a href = \"UserPageServlet\"> I want to go home. </a>");
 			%>
 		</p>
+</div>
+</div>
 </body>
 </html>

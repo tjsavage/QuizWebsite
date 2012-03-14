@@ -11,8 +11,15 @@
 	session.setAttribute("other", other);
 %>
 <title> <% out.print(other.getUsername() + "'s page"); %></title>
+
+<jsp:include page="HeaderInclude.jsp" />
+
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+	<div class="wrapper">
 	<h1> <% out.print(other.getUsername() + "'s page"); %> </h1>
 		<p> 
 			<% 
@@ -29,5 +36,7 @@
 		out.print("<a href = \"MessageServlet?id=" + other.getID() + "\"> Send them a message. </a> <br>");
 		out.print("<a href = \"UserPageServlet\"> I want to go home. </a>");
 	%>
+</div>
+</div>
 </body>
 </html>

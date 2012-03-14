@@ -6,12 +6,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create Quiz</title>
 
+<jsp:include page="HeaderInclude.jsp" />
+
+
 <script type="text/javascript" src="/QuizWebsite/js/jquery.js"></script>
 <script type="text/javascript" src="/QuizWebsite/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/QuizWebsite/js/quizCreation.js"></script>
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
 
+<div class="container">
+	<div class="wrapper">
+<h1>Create a Quiz!</h1>
 <form method="POST">
 	<fieldset>
 		<legend>Quiz Info</legend>
@@ -29,12 +36,7 @@
 	<fieldset id="questions">
 		
 	</fieldset>
-	
-	<input type="hidden" value="0" name="num_questions" id="num_questions" />
-	<input type="submit" value="Submit" />
-</form>
-
-<div>
+	<div>
 	<select id="new_question_type">
 		<option value="0">Question-Response</option>
 		<option value="1">Fill-in-the-Blank</option>
@@ -43,6 +45,13 @@
 	</select>
 	<a href="javascript:addQuestion()">Add Question</a>
 </div>
+<br />
+	<input type="hidden" value="0" name="num_questions" id="num_questions" />
+	<input type="submit" value="Submit" />
+</form>
 
+
+</div>
+</div>
 </body>
 </html>

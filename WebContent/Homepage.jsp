@@ -9,12 +9,20 @@
 	User user = (User) request.getSession(true).getAttribute("user");
 %>
 <title>Homepage</title>
+
+<jsp:include page="HeaderInclude.jsp" />
+
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+	<div class="wrapper">
 	<h1>It's the homepage, stupid.</h1>
 	<%
 		out.print("<a href = \"UserPageServlet\">" + user.getUsername() + "</a>");
 	%>
-	
+</div>
+</div>
 </body>
 </html>

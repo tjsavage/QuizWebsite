@@ -3,6 +3,7 @@ package models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.sql.Date;
 
 public class Quiz {
@@ -141,5 +142,11 @@ public class Quiz {
 
 	public void setImmediateCorrection(boolean immediateCorrection) {
 		this.immediateCorrection = immediateCorrection;
+	}
+
+	public void shuffleQuestion() {
+		if (!this.isOrdered()) {
+			Collections.shuffle(questions);
+		}	
 	}
 }

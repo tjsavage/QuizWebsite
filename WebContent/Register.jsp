@@ -5,8 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+<jsp:include page="HeaderInclude.jsp" />
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+	<div class="wrapper">
 <h1>Register to Jack and taylor's Website</h1>
 		<p>
 		<%
@@ -24,5 +30,7 @@
 			</p>
 		</form>
 		<a href = "LoginServlet"> Already have an account? Login here.</a>
+</div>
+</div>
 </body>
 </html>

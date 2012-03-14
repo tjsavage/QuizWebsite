@@ -7,8 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>My Challenges</title>
+
+<jsp:include page="HeaderInclude.jsp" />
+
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+	<div class="wrapper">
 <p> challenges: </p>
 	<%
 		ArrayList<Challenge> challenges = (ArrayList<Challenge>) request.getAttribute("challenges");
@@ -16,5 +23,7 @@
 			out.println("<li> <a href = \"QuizPage?id=" + challenges.get(i).getID() + "\">" + challenges.get(i).getUsername() + "</a> </li>");
 		}
 	%>
+</div>
+</div>
 </body>
 </html>

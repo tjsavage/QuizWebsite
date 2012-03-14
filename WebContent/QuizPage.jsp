@@ -13,8 +13,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title><%= quiz != null? quiz.getName() : "Invalid Quiz"  %></title>
+
+<jsp:include page="HeaderInclude.jsp" />
+
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+	<div class="wrapper">
 <% if (quiz == null) { %>
 <h1>Invalid Quiz</h1>
 <% } else { %>
@@ -58,5 +65,8 @@
 <br />
 <a href="TakeQuizServlet?id=<%= quiz.getId() %>&question=0">Take Quiz</a>
 <% } %>
+
+</div>
+</div>
 </body>
 </html>

@@ -41,6 +41,9 @@ public class TakeQuizServlet extends HttpServlet {
 		int quizID = Integer.parseInt(request.getParameter("id"));
 		QuizFactory qf = QuizFactory.sharedInstance();
 		Quiz quiz = qf.retrieveQuiz(quizID);
+		if (!quiz.isOrdered()) {
+			quiz.shuffleQuestion();
+		}
 		request.setAttribute("quiz", quiz);
 		
 		if (quiz.isMultipage()) {

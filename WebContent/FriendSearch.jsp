@@ -10,8 +10,15 @@
 	User user = (User) request.getSession().getAttribute("user");
 %>
 <title>Friend Search</title>
+
+<jsp:include page="HeaderInclude.jsp" />
+
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+	<div class="wrapper">
 	<h1> This. Is. The. QUIZ NETWORK. </h1>
 		
 		<p> Find friends: </p>
@@ -27,5 +34,7 @@
 		<%
 			out.print("<a href = \"UserPageServlet\">" + user.getUsername() + "</a>");
 		%>
+</div>
+</div>
 </body>
 </html>

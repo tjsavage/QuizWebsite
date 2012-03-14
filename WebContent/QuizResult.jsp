@@ -14,8 +14,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Results for <%= quiz.getName() %></title>
+
+<jsp:include page="HeaderInclude.jsp" />
+
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+	<div class="wrapper">
 <h1>Results for <%= quiz.getName() %></h1>
 <p>You got <%= result.getScore() %> out of <%= quiz.getQuestions().size() %></p>
 <ol>
@@ -26,5 +33,7 @@ for(int i = 0; i < yourAnswers.size(); i++) { %>
 	<li>Your answers: <%= yourAnswers.get(i) %>, Correct Answer(s): <%= acceptableAnswers.get(i) %></li>
 <% } %>
 </ol>
+</div>
+</div>
 </body>
 </html>

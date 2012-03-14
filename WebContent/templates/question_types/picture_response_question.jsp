@@ -1,5 +1,5 @@
 <fieldset id="<%= request.getParameter("qIndex") %>_block">
-	<legend>Image-Response</legend>
+	<legend>Picture-Response</legend>
 	<label>Image URL</label>
 	<input type="hidden" name="<%= request.getParameter("qIndex") %>_type" value="3" />
 	<input type="text" name="<%= request.getParameter("qIndex") %>_question" />

@@ -14,11 +14,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title><%= quiz.getName() %></title>
 
+<jsp:include page="HeaderInclude.jsp" />
+
 <script type="text/javascript" src="/QuizWebsite/js/jquery.js"></script>
 <script type="text/javascript" src="/QuizWebsite/js/jquery-ui.js"></script>
 <script type="text/javascript" src="js/singlePageQuiz.js"></script>
 </head>
 <body>
+	<jsp:include page="templates/nav.jsp" />
+
+<div class="container">
+<div class="wrapper">
 <h1><%= quiz.getName() %></h1>
 <div style="display:none" id="result">
 	<div id="result_status"></div>
@@ -48,5 +54,7 @@ for(int index = 0; index < questions.size(); index++) {
 
 
 </form>
+</div>
+</div>
 </body>
 </html>

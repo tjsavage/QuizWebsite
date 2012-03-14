@@ -75,6 +75,7 @@ public class UserFactory {
 				User user = new User(false);
 				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
+				user.setID(rs.getInt("id"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
