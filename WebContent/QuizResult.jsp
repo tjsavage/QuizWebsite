@@ -33,6 +33,7 @@ for(int i = 0; i < yourAnswers.size(); i++) { %>
 	<li>Your answers: <%= yourAnswers.get(i) %>, Correct Answer(s): <%= acceptableAnswers.get(i) %></li>
 <% } %>
 </ol>
+<p>Completed in <%= result.getCompletionTime() %> seconds.</p>
 </div>
 </div>
 </body>

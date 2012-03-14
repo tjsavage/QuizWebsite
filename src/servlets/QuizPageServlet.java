@@ -14,6 +14,7 @@ import models.Quiz;
 import models.QuizFactory;
 import models.QuizResult;
 import models.QuizResultFactory;
+import models.User;
 
 /**
  * Servlet implementation class QuizPage
@@ -37,13 +38,17 @@ public class QuizPageServlet extends HttpServlet {
 		int quizID = Integer.parseInt(request.getParameter("id"));
 		QuizFactory factory = QuizFactory.sharedInstance();
 		Quiz quiz = factory.retrieveQuiz(quizID);
+		User user = (User)request.getSession().getAttribute("user");
 		
 		QuizResultFactory resultFactory = QuizResultFactory.sharedInstance();
 		ArrayList<QuizResult> quizResultsByDate = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.DATE);
 		ArrayList<QuizResult> quizResultsByScore = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.SCORE);
+		ArrayList<QuizResult> quizResultsForUser = resultFactory.retrieveQuizResultsForUser(user.getID());
+		
 		request.setAttribute("quiz", quiz);
 		request.setAttribute("quizResultsByDate", quizResultsByDate);
 		request.setAttribute("quizResultsByScore", quizResultsByScore);
+		request.setAttribute("quizResultsForUser", quizResultsForUser);
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("QuizPage.jsp");
 		dispatch.forward(request, response);

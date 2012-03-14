@@ -1,0 +1,26 @@
+todo:
+- encrypt users passwords in the database
+- display user's history on the home page
+- achievements
+- admin interface
+	- create announcements that display on homepage
+	- remove user accounts
+	- remove quizes
+	- clear all history information for a quiz
+	- promote user accounts to admin accounts
+	- see site stats (# of users and # of quizzes taken)
+- add things to home page
+	- admin announcements
+	- list of popular quizzes
+	- list of recently created quizzes
+	- list of player's recent activity (quiz taking and creating)
+	- achievements
+	- messages
+	- friends recent activities
+- add to quiz page
+	- top performers in last day
+	- summary statistics
+- make sure user starts on login page if they're not logged in
+- quiz rating and reviews?
+- practice mode?
+- create read me which lists team members and all features
