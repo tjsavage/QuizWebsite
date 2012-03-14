@@ -31,12 +31,6 @@ public class QuizFactory {
 	}
 	
 	public Quiz retrieveQuiz(int quizID) {
-		String name, description;
-		int creatorID;
-		boolean ordered, multipage;
-		Date dateCreated;
-		ArrayList<Question> questions = new ArrayList<Question>();
-		
 		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet result = connection.performQuery("SELECT * FROM quizzes WHERE id=" + quizID);
 		
@@ -59,10 +53,11 @@ public class QuizFactory {
 		int creatorID = result.getInt("creator");
 		boolean ordered = result.getBoolean("ordered");
 		boolean multipage = result.getBoolean("multi_page");
+		boolean immediateCorrection = result.getBoolean("immediate_correction");
 		Date dateCreated = result.getDate("date_created");
 		ArrayList<Question> questions = retrieveQuestions(quizID);
 		
-		Quiz quiz = new Quiz(quizID, name, description, creatorID, ordered, questions, multipage, dateCreated);
+		Quiz quiz = new Quiz(quizID, name, description, creatorID, ordered, questions, multipage, immediateCorrection, dateCreated);
 		return quiz;
 	}
 	
@@ -96,9 +91,9 @@ public class QuizFactory {
 	
 	public void insertQuiz(Quiz quiz) {
 		DBConnection connection = DBConnection.sharedInstance();
-		String queryString = "INSERT INTO quizzes (name, description, creator, ordered, multi_page) " +
+		String queryString = "INSERT INTO quizzes (name, description, creator, ordered, multi_page, immediate_correction) " +
 				"VALUES ('" + quiz.getSafeName() + "', '" + quiz.getSafeDescription() + "', "
-				 + quiz.getCreatorID() + ", " + (quiz.isOrdered() ? 1 : 0) + ", " + (quiz.isMultipage() ? 1 : 0) + ")";
+				 + quiz.getCreatorID() + ", " + (quiz.isOrdered() ? 1 : 0) + ", " + (quiz.isMultipage() ? 1 : 0) + ", " + (quiz.isImmediateCorrection() ? 1 : 0) + ")";
 		System.out.println(queryString);
 		
 		int quizID = connection.insert(queryString);

@@ -48,8 +48,9 @@ public class CreateQuizServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
-		boolean ordered = request.getParameter("ordered").equals("on");
-		boolean multi_page = request.getParameter("multi_page").equals("on");
+		boolean ordered = request.getParameter("ordered") != null;
+		boolean multi_page = request.getParameter("multi_page") != null;
+		boolean immediateCorrection = request.getParameter("immediate_correction") != null;
 		System.out.println(multi_page);
 		System.out.println(request.getParameter("multi_page"));
 		User user = (User) request.getSession().getAttribute("user");
@@ -81,7 +82,7 @@ public class CreateQuizServlet extends HttpServlet {
 			}
 		}
 		
-		Quiz quiz = new Quiz(name, description, user.getID(), ordered, questions, multi_page);
+		Quiz quiz = new Quiz(name, description, user.getID(), ordered, questions, multi_page, immediateCorrection);
 		QuizFactory factory = QuizFactory.sharedInstance();
 		factory.insertQuiz(quiz);
 	}

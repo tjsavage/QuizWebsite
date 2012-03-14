@@ -89,10 +89,11 @@ public class UserFactory {
 		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE id = " + id);
 		User user = new User(false);;
 		try {
-			rs.next();
-			user.setUsername(rs.getString("username"));
-			user.setPassword(rs.getString("password"));
-			user.setID(id);
+			if(rs.next()) {
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setID(id);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -23,6 +23,8 @@
 		<input type="checkbox" name="ordered" />
 		<label for="multi_page">Each question on separate page:</label>
 		<input type="checkbox" name="multi_page" />
+		<label for="immediate_correction">Immediate Correction (only for multipage quiz)</label>
+		<input type="checkbox" name="immediate_correction" />
 	</fieldset>
 	<fieldset id="questions">
 		

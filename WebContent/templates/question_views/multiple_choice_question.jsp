@@ -4,7 +4,7 @@
 	<label><%= question.getQuestion() %></label>
 	<% MultipleChoiceQuestion mcQ = (MultipleChoiceQuestion)question; %>
 	<% for(int i = 0; i < mcQ.getChoices().size(); i++) {
-		out.println("<input type='radio' name='" + index + "_answer' value='" + mcQ.getChoices().get(i) + "'>" + mcQ.getChoices().get(i) + "</option>");
+		out.println("<input type='radio' name='" + index + "_answer' id='" + index + "_answer' value='" + mcQ.getChoices().get(i) + "'>" + mcQ.getChoices().get(i) + "</option>");
 	}
 	%>
 	</select>

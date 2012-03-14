@@ -20,6 +20,11 @@
 </head>
 <body>
 <h1><%= quiz.getName() %></h1>
+<div style="display:none" id="result">
+	<div id="result_status"></div>
+	Correct answers: <div id="result_correct_answers"></div>
+	<div id="result_next_question"></div>
+</div>
 <form method="POST">
 <input type="hidden" name="start_time" value="<%= new Date().getTime() %>" />
 <% 
@@ -30,7 +35,11 @@ for(int index = 0; index < questions.size(); index++) {
 	<div class="question_block" <% if (index > 0) { %>style="display:none"<% } %> id="question_<%= index %>">
 	<%@ include file="QuestionTemplate.jsp" %>
 	<% if (index < questions.size() - 1)  { %>
+		<% if(quiz.isImmediateCorrection()) { %>
+			<a href="javascript:checkAnswer(<%= (index) %>, <%= question.getId() %>)">Check Answer</a>
+		<% } else { %>
 		<a href="javascript:showQuestion(<%= (index + 1) %>)">Next Question</a>
+		<% } %>
 	<% } else { %>
 		<input type="submit" value="Submit" />
 	<% } %>

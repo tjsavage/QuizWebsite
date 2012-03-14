@@ -5,19 +5,19 @@ import java.util.ArrayList;
 public class MultipleChoiceQuestion extends Question {
 	ArrayList<String> choices;
 	
-	public MultipleChoiceQuestion(int id, String prompt, ArrayList<String> choices, String answer) {
+	public MultipleChoiceQuestion(int id, String prompt, ArrayList<String> choices, ArrayList<String> answers) {
 		this.id = id;
 		this.question = prompt;
 		this.correctAnswers = new ArrayList<String>();
-		this.correctAnswers.add(answer);
+		this.correctAnswers = answers;
 		this.choices = choices;
 		this.type = Question.QuestionType.MULTIPLE_CHOICE;
 	}
 	
-	public MultipleChoiceQuestion(String question, ArrayList<String> choices, String answer) {
+	public MultipleChoiceQuestion(String question, ArrayList<String> choices, ArrayList<String> answers) {
 		this.question = question;
 		this.correctAnswers = new ArrayList<String>();
-		this.correctAnswers.add(answer);
+		this.correctAnswers = answers;
 		this.choices = choices;
 		this.type = Question.QuestionType.MULTIPLE_CHOICE;
 	}

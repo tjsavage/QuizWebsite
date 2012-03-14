@@ -61,7 +61,7 @@ public class QuestionFactory {
 		return answers;
 	}
 	
-	private Question retrievePictureResponseQuestion(int questionID,
+	private PictureResponseQuestion retrievePictureResponseQuestion(int questionID,
 			int specificID) {
 		DBConnection connection = DBConnection.sharedInstance();
 		
@@ -80,7 +80,7 @@ public class QuestionFactory {
 		PictureResponseQuestion question = new PictureResponseQuestion(questionID, question_text, answers);
 		return question;
 	}
-	private Question retrieveMultipleChoiceQuestion(int questionID,
+	private MultipleChoiceQuestion retrieveMultipleChoiceQuestion(int questionID,
 			int specificID) {
 		DBConnection connection = DBConnection.sharedInstance();
 		
@@ -108,7 +108,7 @@ public class QuestionFactory {
 		
 		ArrayList<String> answers = retrieveAnswers(questionID);
 		
-		MultipleChoiceQuestion question = new MultipleChoiceQuestion(specificID, question_text, choices, answers.get(0));
+		MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionID, question_text, choices, answers);
 		return question;
 	}
 	private FillInQuestion retrieveFillInQuestion(int questionID, int specificID) {

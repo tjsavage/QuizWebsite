@@ -15,6 +15,7 @@ public class Quiz {
 	private boolean ordered;
 	private ArrayList<Question> questions;
 	private boolean multipage;
+	private boolean immediateCorrection;
 	private Date dateCreated;
 	
 	public Quiz(int id, 
@@ -24,6 +25,7 @@ public class Quiz {
 			boolean ordered, 
 			ArrayList<Question> questions,
 			boolean multipage,
+			boolean immediateCorrection,
 			Date dateCreated) {
 		this.id = id;
 		this.name = name;
@@ -32,6 +34,7 @@ public class Quiz {
 		this.ordered = ordered;
 		this.questions = questions;
 		this.multipage = multipage;
+		this.immediateCorrection = immediateCorrection;
 		this.dateCreated = dateCreated;
 	}
 	
@@ -40,13 +43,15 @@ public class Quiz {
 			int creatorID, 
 			boolean ordered, 
 			ArrayList<Question> questions,
-			boolean multipage) {
+			boolean multipage,
+			boolean immediateCorrection) {
 		this.name = name;
 		this.description = description;
 		this.creatorID = creatorID;
 		this.ordered = ordered;
 		this.questions = questions;
 		this.multipage = multipage;
+		this.immediateCorrection = immediateCorrection;
 	}
 	
 	public User getCreator() {
@@ -130,4 +135,11 @@ public class Quiz {
 		return questions.get(questionIndex);
 	}
 	
+	public boolean isImmediateCorrection() {
+		return immediateCorrection;
+	}
+
+	public void setImmediateCorrection(boolean immediateCorrection) {
+		this.immediateCorrection = immediateCorrection;
+	}
 }
