@@ -144,6 +144,7 @@ public class QuestionFactory {
 		
 		ArrayList<String> answers = retrieveAnswers(questionID);
 		
+		
 		QuestionResponseQuestion question = new QuestionResponseQuestion(questionID, question_text, answers);
 		return question;	
 	}

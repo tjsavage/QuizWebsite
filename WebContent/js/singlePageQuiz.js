@@ -5,13 +5,12 @@ function showQuestion(index) {
 }
 
 function checkAnswer(index, questionID) {
-	var answer = $("#" + index + "_answer").val();
+	var answer = $("input[name=" + index + "_answer]:checked").val();
 	if (!answer) {
-		answer = $("#" + index + "_answer:checked").val();
+		answer = $("#" + index + "_answer").val();
 	}
 	$.post('SingleQuestionServlet', "questionID=" + questionID + "&answer=" + answer, function(data, textStatus) {
 		
-		alert(data);
 		var result = $.parseJSON(data)['question'];
 		$("#result_status").html(result['correct'] ? "Correct!" : "Wrong");
 		$("#result_correct_answers").html(result['answers']);
