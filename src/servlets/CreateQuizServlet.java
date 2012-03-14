@@ -124,7 +124,7 @@ public class CreateQuizServlet extends HttpServlet {
 			}
 		}
 		
-		MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionString, choices, answers.get(0));
+		MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionString, choices, answers);
 		return question;
 	}
 

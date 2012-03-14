@@ -14,7 +14,7 @@ public class ChallengeFactory {
 		return sharedInstance;
 	}
 	
-	public Challenge getMessage(int id) {
+	public Challenge getChallenge(int id) {
 		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery("SELECT * FROM challenges WHERE id = " + id);
 		try {
