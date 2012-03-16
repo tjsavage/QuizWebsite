@@ -38,6 +38,12 @@ public class CreateQuizServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null || !user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+		
 		RequestDispatcher dispatch = request.getRequestDispatcher("CreateQuiz.jsp");
 		dispatch.forward(request, response);
 	}
@@ -54,6 +60,10 @@ public class CreateQuizServlet extends HttpServlet {
 		System.out.println(multi_page);
 		System.out.println(request.getParameter("multi_page"));
 		User user = (User) request.getSession().getAttribute("user");
+		if (user == null || !user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
 		
 		int numQuestions = Integer.parseInt(request.getParameter("num_questions"));
 		ArrayList<Question> questions = new ArrayList<Question>();

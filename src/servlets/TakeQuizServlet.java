@@ -62,6 +62,9 @@ public class TakeQuizServlet extends HttpServlet {
 		int quizID = Integer.parseInt(request.getParameter("id"));
 		long startTimeMS = Long.parseLong(request.getParameter("start_time"));
 		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
 		
 		int elapsedTime = (int) (((new Date().getTime()) - startTimeMS) / 1000);
 		QuizFactory qf = QuizFactory.sharedInstance();

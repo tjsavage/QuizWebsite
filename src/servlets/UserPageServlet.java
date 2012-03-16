@@ -39,6 +39,10 @@ public class UserPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
+		
 		if (user.getAdmin()) {
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect("/QuizWebsite/AdminUserServlet");

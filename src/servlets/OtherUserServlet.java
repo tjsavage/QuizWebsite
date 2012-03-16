@@ -38,6 +38,10 @@ public class OtherUserServlet extends HttpServlet {
 		UserFactory uf = new UserFactory();
 		User other = uf.getUserFromID(id);
 		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
+		
 		ImageFactory imgf =ImageFactory.sharedInstance();
 		Image profileImage = imgf.getProfileImage(id);
 		

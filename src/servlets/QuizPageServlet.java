@@ -39,6 +39,9 @@ public class QuizPageServlet extends HttpServlet {
 		QuizFactory factory = QuizFactory.sharedInstance();
 		Quiz quiz = factory.retrieveQuiz(quizID);
 		User user = (User)request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
 		
 		QuizResultFactory resultFactory = QuizResultFactory.sharedInstance();
 		ArrayList<QuizResult> quizResultsByDate = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.DATE);

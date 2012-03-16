@@ -36,6 +36,10 @@ public class FriendSearchServlet extends HttpServlet {
 		RequestDispatcher dispatch; 
 		UserFactory uf = new UserFactory();
 		User user = (User) request.getSession().getAttribute("user");
+		if(user == null || !user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
 		int id = user.getID();
 		ArrayList<User> users = uf.getListUsers(id);
 		request.setAttribute("users", users);
@@ -50,6 +54,10 @@ public class FriendSearchServlet extends HttpServlet {
 		RequestDispatcher dispatch; 
 		User other = (User) request.getSession().getAttribute("other");
 		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
+		
 		if (!user.isFriend(other.getID()) && !user.isWaiting(other.getID())) {
 			user.sendFriendRequest(other.getID());
 			response.sendRedirect("/QuizWebsite/OtherUserServlet?id=" + other.getID());
