@@ -18,19 +18,14 @@
 
 </head>
 <body>
+	
 	<jsp:include page="templates/nav.jsp" />
 
 <div class="container">
 	<div class="wrapper">
-	<h1> <% out.print(other.getUsername() + "'s page"); %> </h1>
+	<h1> <% out.print(other.getUsername() + "'s page"); %> </h1><br>
 		</div>
-		<form method = "get" action = "ViewImagesServlet" >
-			<p> 
-				<input type = "hidden" name = "userID" value = "<%= other.getID() %>" >
-				<input type = "submit" value = "lets stalk">
-			</p>
-		</form>
-		<img src="<%= profileImage.getUrl() %>" width = "175"/>
+		<a href = "ViewImagesServlet?userID=<%=other.getID()%>"> <img class="imagedropshadow" src="<%= profileImage.getUrl() %>" width = "175"/></a>
 		<% 
 				if ((Boolean) request.getAttribute("isAdmin")) {
 					out.print("<form method = \"get\" action = \"TerminateUserServlet\" >");

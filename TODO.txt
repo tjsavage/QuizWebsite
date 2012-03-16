@@ -1,16 +1,16 @@
 todo:
-- display user's history on the home page
+
+-delete friends
 
 - admin interface
 	- add page to view deleted accounts
 	
 - add things to home page
 	
-	- list of popular quizzes
-	- list of recently created quizzes
+	
 	- achievements
 	
-	- friends recent activities
+	
 - add to quiz page
 	- top performers in last day
 	- summary statistics
@@ -22,6 +22,11 @@ todo:
 
 
 finished:
+- display user's history on the home page
+- friends recent activities
+- list of popular quizzes
+	- list of recently created quizzes
+	- list of player's recent activity (quiz taking and creating)
 - make sure user starts on login page if they're not logged in
 - messages
 - admin announcements

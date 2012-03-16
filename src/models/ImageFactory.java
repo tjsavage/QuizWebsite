@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ImageFactory {
 	
-	private String defaultUrl = "http://www.murketing.com/journal/wp-content/uploads/2009/04/vimeo.jpg";
+	private String defaultUrl = "http://28.media.tumblr.com/tumblr_m101k4lsvB1rpefl4o1_250.png";
 	
 	public static ImageFactory sharedInstance;
 	public static	ImageFactory sharedInstance() {

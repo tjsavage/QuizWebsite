@@ -16,6 +16,7 @@
 	User user = (User) request.getSession().getAttribute("user");
 	Image profileImage = (Image) request.getAttribute("profileImage");
 	UserFactory uf = new UserFactory();
+	ArrayList<User> friends = (ArrayList<User>) request.getAttribute("friends");
 %>
 <title><%= user.getUsername() %></title>
 </head>
@@ -24,31 +25,28 @@
 	<div class="container">
 	<div class="wrapper">
 		<h1> <% out.print(user.getUsername() + "'s page"); %> </h1>
-		
-		<div class="span4">
-		<img src="<%= profileImage.getUrl() %>" width = "175"/>
 		<br>
-		<form method = "get" action = "AddImageServlet" >
-			<p> 
-				<input type = "submit" value= "Add a picture to your profile">
-			</p>
-		</form>
-		<form method = "get" action = "ViewImagesServlet" >
-			<p> 
-				<input type = "hidden" name = "userID" value = "<%= user.getID() %>" >
-				<input type = "submit" value = "Veiw your pictures">
-			</p>
-		</form>
+		<div class="span4">
+		<a href = "ViewImagesServlet?userID=<%=user.getID()%>"> <img class="imagedropshadow" src="<%= profileImage.getUrl() %>" width = "205"/></a>
+		<br>
+		<a href = "AddImageServlet" class = "btn" > add a picture</a>
+		<a href = "FriendSearchServlet" class = "btn" >   find friends  </a>
+		<br>
+		<a href = "FriendSearchServlet" >   <h2>Friends (<%=friends.size() %>)</h2>  </a>
+		
 		<p> recent announcements: </p>
+		<ul class="menu">
 		<%
 			ArrayList<Anouncement> anouncements = (ArrayList<Anouncement>) request.getAttribute("anouncements");
 			for (int i = 0; i < anouncements.size(); i++) {
-				out.print("<li>");
+				out.print("<li class=\"menu\">");
 				out.print(anouncements.get(i).getAnouncement());
 				out.println("</li>");
 			}
 		%>
+		</ul>
 		<p> inbox: </p>
+		<ul id="list1">
 		<%
 			ArrayList<Message> inbox = (ArrayList<Message>) request.getAttribute("inbox");
 			for (int i = 0; i < inbox.size(); i++) {
@@ -58,6 +56,7 @@
 				out.println("</li>");
 			}
 		%>
+		</ul>
 		<p> sent: </p>
 		<%
 			ArrayList<Message> sent = (ArrayList<Message>) request.getAttribute("sent");
@@ -72,12 +71,11 @@
 		<div class="span4">
 		<p> friends: </p>
 		<%
-			ArrayList<User> friends = (ArrayList<User>) request.getAttribute("friends");
 			for (int i = 0; i < friends.size(); i++) {
 				out.println("<li> <a href = \"OtherUserServlet?id=" + friends.get(i).getID() + "\">" + friends.get(i).getUsername() + "</a> </li>");
 			}
 		%>
-		<p> pending requestz: </p>
+		<p> pending request: </p>
 		<%
 			ArrayList<User> pendingFriends = (ArrayList<User>) request.getAttribute("pendingFriends");
 			for (int i = 0; i < pendingFriends.size(); i++) {
@@ -103,9 +101,6 @@
 				<input type = "submit" value= "View Challenges">
 			</p>
 		</form>
-		<%	 
-			out.print("<a href = \"FriendSearchServlet\"> find friends </a>");
-		%>
 		<jsp:include page="templates/recent_activity.jsp" />
 	</div>
 	</div>
