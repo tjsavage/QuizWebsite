@@ -18,6 +18,8 @@ DROP TABLE IF EXISTS anouncements;
 
 DROP TABLE IF EXISTS terminated_users;
 
+DROP TABLE IF EXISTS images;
+
 DROP TABLE IF EXISTS quizzes;
 
 DROP TABLE IF EXISTS questions;

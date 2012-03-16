@@ -43,9 +43,9 @@ public class AdminControl {
 		connection.insert("UPDATE users SET isAdmin = 1 WHERE id = " + id);
 	}
 	
-	public void clearQuizHistory(int id) {
+	public void clearQuizHistory(int quizID) {
 		DBConnection connection = DBConnection.sharedInstance();
-		//connection.insert("UPDATE users SET isAdmin = 1 WHERE id = " + id);
+		connection.insert("DELETE FROM quiz_results WHERE quizID = " + quizID);
 	}
 	
 	public void sendAnouncement(int adminID, String message, boolean isAdminOnly) {
