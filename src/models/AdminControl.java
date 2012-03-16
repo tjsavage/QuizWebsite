@@ -1,5 +1,8 @@
 package models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class AdminControl {
 
 	public static AdminControl sharedInstance;
@@ -60,6 +63,30 @@ public class AdminControl {
 	public void removeQuiz(int quizID) {
 		DBConnection connection = DBConnection.sharedInstance();
 		connection.insert("DELETE FROM quizzes WHERE id = " + quizID);
+	}
+	
+	public int getNumUsers() {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT COUNT(*) AS num_users FROM users");
+		try {
+			rs.next();
+			return rs.getInt("num_users");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public int getNumTaken() {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT COUNT(*) AS num_taken FROM quiz_results");
+		try {
+			rs.next();
+			return rs.getInt("num_taken");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 }

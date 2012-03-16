@@ -30,7 +30,7 @@
 				<input type = "submit" value = "lets stalk">
 			</p>
 		</form>
-		<img src="<%= profileImage.getUrl() %>" />
+		<img src="<%= profileImage.getUrl() %>" width = "175"/>
 		<% 
 				if ((Boolean) request.getAttribute("isAdmin")) {
 					out.print("<form method = \"get\" action = \"TerminateUserServlet\" >");

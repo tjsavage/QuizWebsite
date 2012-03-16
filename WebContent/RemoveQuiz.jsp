@@ -21,11 +21,12 @@
 <div class="container">
 	<div class="wrapper">
 	<h1> Do you really want to delete <%= quiz.getName() %> ? </h1>
+	<br>
 	<form method = "post" action = "RemoveQuizServlet" >
 		Send a message to the quiz's creator: <BR>
-		<TEXTAREA NAME="reason" COLS=40 ROWS=6></TEXTAREA> Your quiz has been removed.
+		<TEXTAREA NAME="reason" COLS=40 ROWS=6>Your quiz, <%= quiz.getName() %>, has been removed.</TEXTAREA>
 		<input type = "hidden" name = "quizID" value = "<%= quiz.getId() %>" >
-		<input type = "hidden" name = "otherID" value = "<%= other.getID() %>" >
+		<input type = "hidden" name = "otherID" value = "<%= other.getID() %>" ><br><br>
 		<P><INPUT TYPE="SUBMIT" VALUE="remove">
 	</form>
 </div>

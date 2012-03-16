@@ -1,30 +1,25 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Image;
-import models.ImageFactory;
-import models.User;
+import models.AdminControl;
 
 /**
- * Servlet implementation class ViewImagesServlet
+ * Servlet implementation class ClearQuizServlet
  */
-@WebServlet("/ViewImagesServlet")
-public class ViewImagesServlet extends HttpServlet {
+@WebServlet("/ClearQuizServlet")
+public class ClearQuizServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewImagesServlet() {
+    public ClearQuizServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +28,10 @@ public class ViewImagesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("userID"));
-		ImageFactory imgf = ImageFactory.sharedInstance();
-		ArrayList<Image> images = imgf.getAllImages(id);
-		request.setAttribute("images", images);
-		request.setAttribute("userID", id);
-		RequestDispatcher dispatch;
-		dispatch = request.getRequestDispatcher("ViewImages.jsp");
-		dispatch.forward(request, response);
+		int quizID = Integer.parseInt(request.getParameter("quizID"));
+		AdminControl ac = AdminControl.sharedInstance();
+		ac.clearQuizHistory(quizID);
+		response.sendRedirect("/QuizWebsite/UserPageServlet");
 	}
 
 	/**

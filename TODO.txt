@@ -2,22 +2,20 @@ todo:
 - display user's history on the home page
 
 - admin interface
-	
-	- clear all history information for a quiz
-	- see site stats (# of users and # of quizzes taken)
+	- add page to view deleted accounts
 	
 - add things to home page
-	- admin announcements
+	
 	- list of popular quizzes
 	- list of recently created quizzes
 	- list of player's recent activity (quiz taking and creating)
 	- achievements
-	- messages
+	
 	- friends recent activities
 - add to quiz page
 	- top performers in last day
 	- summary statistics
-- make sure user starts on login page if they're not logged in
+
 - quiz rating and reviews?
 - practice mode?
 - create read me which lists team members and all features
@@ -25,6 +23,11 @@ todo:
 
 
 finished:
+- make sure user starts on login page if they're not logged in
+- messages
+- admin announcements
+- see site stats (# of users and # of quizzes taken)
+- clear all history information for a quiz
 - profile picture system
 - remove quizzes
 - create announcements that display on homepage

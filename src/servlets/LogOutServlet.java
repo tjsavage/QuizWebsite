@@ -1,30 +1,25 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Image;
-import models.ImageFactory;
 import models.User;
 
 /**
- * Servlet implementation class ViewImagesServlet
+ * Servlet implementation class LogOutServlet
  */
-@WebServlet("/ViewImagesServlet")
-public class ViewImagesServlet extends HttpServlet {
+@WebServlet("/LogOutServlet")
+public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewImagesServlet() {
+    public LogOutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +28,9 @@ public class ViewImagesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("userID"));
-		ImageFactory imgf = ImageFactory.sharedInstance();
-		ArrayList<Image> images = imgf.getAllImages(id);
-		request.setAttribute("images", images);
-		request.setAttribute("userID", id);
-		RequestDispatcher dispatch;
-		dispatch = request.getRequestDispatcher("ViewImages.jsp");
-		dispatch.forward(request, response);
+		User user = (User) request.getSession().getAttribute("user");
+		if (user != null) user.setLoggedIn(false);
+		response.sendRedirect("/QuizWebsite/LoginServlet");
 	}
 
 	/**

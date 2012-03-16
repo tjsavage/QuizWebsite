@@ -25,7 +25,7 @@
 		<h1> <% out.print(user.getUsername() + "'s page"); %> </h1>
 		
 		<div class="span4">
-		<img src="<%= profileImage.getUrl() %>" />
+		<img src="<%= profileImage.getUrl() %>" width = "175"/>
 		<br>
 		<form method = "get" action = "AddImageServlet" >
 			<p> 
