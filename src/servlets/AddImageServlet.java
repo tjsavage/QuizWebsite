@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.AdminControl;
 import models.Image;
 import models.ImageFactory;
 import models.User;
-import models.UserFactory;
 
 /**
- * Servlet implementation class OtherUserServlet
+ * Servlet implementation class AddImageServlet
  */
-@WebServlet("/OtherUserServlet")
-public class OtherUserServlet extends HttpServlet {
+@WebServlet("/AddImageServlet")
+public class AddImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OtherUserServlet() {
+    public AddImageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +34,7 @@ public class OtherUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatch;
-		int id = Integer.parseInt(request.getParameter("id"));
-		UserFactory uf = new UserFactory();
-		User other = uf.getUserFromID(id);
-		User user = (User) request.getSession().getAttribute("user");
-		ImageFactory imgf =ImageFactory.sharedInstance();
-		Image profileImage = imgf.getProfileImage(id);
-		
-		request.setAttribute("profileImage", profileImage);
-		request.setAttribute("isAdmin", user.getAdmin());
-		request.setAttribute("isFriend", user.isFriend(other.getID()));
-		request.setAttribute("isWaiting", user.isWaiting(other.getID()));
-		request.setAttribute("other", other);
-		dispatch = request.getRequestDispatcher("OtherUser.jsp");
+		dispatch = request.getRequestDispatcher("AddImage.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -54,7 +42,17 @@ public class OtherUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		User user = (User) request.getSession().getAttribute("user");
+		String url = (String) request.getParameter("url");
+		boolean isProfile = false;
+		if (request.getParameter("isProfile") != null) isProfile = true;
+		ImageFactory imgf = ImageFactory.sharedInstance();
+		Image image = new Image();
+		image.setUserID(user.getID());
+		image.setUrl(url);
+		image.setIsProfile(isProfile);
+		imgf.addPicture(image);
+		response.sendRedirect("/QuizWebsite/ViewImagesServlet?userID=" + user.getID());
 	}
 
 }

@@ -4,8 +4,8 @@ todo:
 - admin interface
 	
 	- clear all history information for a quiz
-
 	- see site stats (# of users and # of quizzes taken)
+	
 - add things to home page
 	- admin announcements
 	- list of popular quizzes
@@ -25,7 +25,8 @@ todo:
 
 
 finished:
-- remove quizes
+- profile picture system
+- remove quizzes
 - create announcements that display on homepage
 - encrypt users passwords in the database
 - promote user accounts to admin accounts

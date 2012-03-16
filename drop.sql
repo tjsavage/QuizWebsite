@@ -14,6 +14,8 @@ DROP TABLE IF EXISTS achievementsAwarded;
 
 DROP TABLE IF EXISTS achievements;
 
+DROP TABLE IF EXISTS anouncements;
+
 DROP TABLE IF EXISTS terminated_users;
 
 DROP TABLE IF EXISTS quizzes;

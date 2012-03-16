@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Anouncement;
 import models.AnouncementFactory;
+import models.Image;
+import models.ImageFactory;
 import models.Message;
 import models.MessageFactory;
 import models.User;
@@ -41,8 +43,11 @@ public class AdminUserServlet extends HttpServlet {
 		UserFactory uf = new UserFactory();
 		MessageFactory mf = new MessageFactory();
 		AnouncementFactory af = new AnouncementFactory();
+		ImageFactory imgf =ImageFactory.sharedInstance();
 		
 		int id = user.getID();
+		
+		Image profileImage = imgf.getProfileImage(user.getID());
 		ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
 		ArrayList<User> friendRequests = uf.getFriendRequests(id);
 		ArrayList<User> friends = uf.getFriends(id);
@@ -50,6 +55,7 @@ public class AdminUserServlet extends HttpServlet {
 		ArrayList<Message> sent = mf.getSent(id);
 		ArrayList<Anouncement> anouncements = af.getFiveMostRecentAdmin();
 		
+		request.setAttribute("profileImage", profileImage);
 		request.setAttribute("anouncements", anouncements);
 		request.setAttribute("inbox", inbox);
 		request.setAttribute("sent", sent);
