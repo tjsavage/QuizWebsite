@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,19 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import models.Image;
 import models.ImageFactory;
 import models.User;
-import models.UserFactory;
 
 /**
- * Servlet implementation class OtherUserServlet
+ * Servlet implementation class ViewImagesServlet
  */
-@WebServlet("/OtherUserServlet")
-public class OtherUserServlet extends HttpServlet {
+@WebServlet("/ViewImagesServlet")
+public class ViewImagesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OtherUserServlet() {
+    public ViewImagesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,24 +33,12 @@ public class OtherUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("userID"));
+		ImageFactory imgf = ImageFactory.sharedInstance();
+		ArrayList<Image> images = imgf.getAllImages(id);
+		request.setAttribute("images", images);
 		RequestDispatcher dispatch;
-		int id = Integer.parseInt(request.getParameter("id"));
-		UserFactory uf = new UserFactory();
-		User other = uf.getUserFromID(id);
-		User user = (User) request.getSession().getAttribute("user");
-		if (!user.isLoggedIn()) {
-			response.sendRedirect("LoginServlet");
-		}
-		
-		ImageFactory imgf =ImageFactory.sharedInstance();
-		Image profileImage = imgf.getProfileImage(id);
-		
-		request.setAttribute("profileImage", profileImage);
-		request.setAttribute("isAdmin", user.getAdmin());
-		request.setAttribute("isFriend", user.isFriend(other.getID()));
-		request.setAttribute("isWaiting", user.isWaiting(other.getID()));
-		request.setAttribute("other", other);
-		dispatch = request.getRequestDispatcher("OtherUser.jsp");
+		dispatch = request.getRequestDispatcher("ViewImages.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -58,7 +46,7 @@ public class OtherUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 	}
 
 }

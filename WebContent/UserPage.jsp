@@ -4,6 +4,7 @@
 <%@ page import="models.Anouncement" %>
 <%@ page import="models.UserFactory" %>
 <%@ page import="models.Message" %>
+<%@ page import="models.Image" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%
 	User user = (User) request.getSession().getAttribute("user");
+	Image profileImage = (Image) request.getAttribute("profileImage");
 	UserFactory uf = new UserFactory();
 %>
 <title><%= user.getUsername() %></title>
@@ -23,6 +25,19 @@
 		<h1> <% out.print(user.getUsername() + "'s page"); %> </h1>
 		
 		<div class="span4">
+		<img src="<%= profileImage.getUrl() %>" />
+		<br>
+		<form method = "get" action = "AddImageServlet" >
+			<p> 
+				<input type = "submit" value= "Add a picture to your profile">
+			</p>
+		</form>
+		<form method = "get" action = "ViewImagesServlet" >
+			<p> 
+				<input type = "hidden" name = "userID" value = "<%= user.getID() %>" >
+				<input type = "submit" value = "Veiw your pictures">
+			</p>
+		</form>
 		<p> recent announcements: </p>
 		<%
 			ArrayList<Anouncement> anouncements = (ArrayList<Anouncement>) request.getAttribute("anouncements");
