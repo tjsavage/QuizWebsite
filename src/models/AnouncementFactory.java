@@ -68,11 +68,11 @@ public class AnouncementFactory {
 	}
 	
 	public ArrayList<Anouncement> getFiveMostRecentAdmin() {
-		return getFiveMostRecentAnouncements("SELECT * FROM  anouncements ORDER BY date_created DESC LIMIT 5");
+		return getFiveMostRecentAnouncements("SELECT * FROM anouncements ORDER BY date_created DESC LIMIT 5");
 	}
 	
 	public ArrayList<Anouncement> getFiveMostRecentUser() {
-		return getFiveMostRecentAnouncements("SELECT * FROM  anouncements WHERE isAdminOnly = 0 ORDER BY date_created DESC LIMIT 5");
+		return getFiveMostRecentAnouncements("SELECT * FROM anouncements WHERE isAdminOnly = 0 ORDER BY date_created DESC LIMIT 5");
 	}
 	
 	private ArrayList<Anouncement> getFiveMostRecentAnouncements(String query) {

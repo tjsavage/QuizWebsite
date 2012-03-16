@@ -8,6 +8,8 @@
 	
 <%
 	User user = (User) request.getSession().getAttribute("user");
+	int id = (Integer) request.getAttribute("userID");
+	ArrayList<Image> images = (ArrayList<Image>) request.getAttribute("images");
 %>
 
 <head>
@@ -17,10 +19,9 @@
 <body>
 	<h1> Look at this fucking guy: </h1>
 		<%
-			ArrayList<Image> images = (ArrayList<Image>) request.getAttribute("images");
 			for (int i = 0; i < images.size(); i++) {
 				System.out.print(images.get(i).getUrl());
-				out.print("<img src=\"" + images.get(i).getUrl() + "\"/>");
+				out.print("<img src=\"" + images.get(i).getUrl() + "\"width = \"175\"/>");
 				if (user.getID() == images.get(i).getUserID()) {
 					out.print("<form method = \"get\" action = \"ProfilePictureServlet\" >");
 					out.print("<input type = \"hidden\" name = \"imageID\" value = \"" + images.get(i).getID() + "\" >");
@@ -30,11 +31,12 @@
 					out.print("<input type = \"submit\" value= \"not so hot\"></form>");
 				}
 			}
+		if (user.getID() == id) {
+			out.print("<form method = \"get\" action = \"UserPageServlet\" >");
+			out.print("<input type = \"submit\" value= \"I can't stand it\"></form>");
+		} else {
+			out.print("<a href = \"OtherUserServlet?id=" + id +"\" >I can't stand it</a>");
+		}
 		%>
-		<form method = "get" action = "UserPageServlet" >
-			<p> 
-				<input type = "submit" value= "I can't stand it">
-			</p>
-		</form>
 </body>
 </html>

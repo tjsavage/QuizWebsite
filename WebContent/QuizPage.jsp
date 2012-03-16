@@ -32,9 +32,13 @@
 				if ((Boolean) request.getAttribute("isAdmin")) {
 					out.print("<form method = \"get\" action = \"RemoveQuizServlet\" >");
 					out.print("<input type = \"hidden\" name = \"id\" value = '" + quiz.getId()  + "'>");
-					out.print("<input type = \"submit\" value= \"delete this quiz\" ></form>");
+					out.print("<input type = \"submit\" value= \"delete this quiz\" ></form><br>");
+					out.print("<form method = \"get\" action = \"ClearQuizServlet\" >");
+					out.print("<input type = \"hidden\" name = \"quizID\" value = '" + quiz.getId()  + "'>");
+					out.print("<input type = \"submit\" value= \"clear this quiz's history\" ></form>");
 				}
 		%>
+<br>
 <h3>Top Scores</h3>
 <table>
 	<thead>

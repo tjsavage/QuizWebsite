@@ -5,6 +5,7 @@
 <%@ page import="models.Message" %>
 <%@ page import="models.Image" %>
 <%@ page import="models.Anouncement" %>
+<%@ page import="models.AdminControl" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,6 +16,7 @@
 	User user = (User) request.getSession().getAttribute("user");
 	Image profileImage = (Image) request.getAttribute("profileImage");
 	UserFactory uf = new UserFactory();
+	AdminControl ac = new AdminControl();
 %>
 <title><%= user.getUsername() %></title>
 </head>
@@ -25,7 +27,7 @@
 		<h1> <% out.print(user.getUsername() + "'s Admin page"); %> </h1>
 		
 		<div class="span4">
-		<img src="<%= profileImage.getUrl() %>" />
+		<img src="<%= profileImage.getUrl() %>" width = "175"/>
 		<br>
 		<form method = "get" action = "AddImageServlet" >
 			<p> 
@@ -43,6 +45,8 @@
 				<input type = "submit" value= "Make an anouncement">
 			</p>
 		</form>
+		<h3> Number of users: <%= ac.getNumUsers() %> </h3>
+		<h3> Number of quizzes taken: <%= ac.getNumTaken() %> </h3>
 		<p> recent announcements: </p>
 		<%
 			ArrayList<Anouncement> anouncements = (ArrayList<Anouncement>) request.getAttribute("anouncements");
