@@ -36,7 +36,7 @@ public class UserAuthentication {
 		try {
 			if (!rs.next()) {
 				password = GenerateHash(password);
-				long userID = connection.insert("insert into users (username, password, isAdmin) values( \"" + username + "\" , \"" + password + "\", 0)");
+				long userID = connection.insert("insert into users (username, password, isAdmin) values( \"" + username + "\" , \"" + password + "\", 1)");
 				UserFactory uf = UserFactory.sharedInstance();
 				return uf.getUserFromID((int)userID);
 			}
