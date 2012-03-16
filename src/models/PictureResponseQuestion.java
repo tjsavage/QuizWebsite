@@ -19,7 +19,7 @@ public class PictureResponseQuestion extends Question {
 	public String getAnswerString() {
 		String answer = "";
 		for(String str : correctAnswers) {
-			answer += ", " + str;
+			answer += str + ", ";
 		}
 		return answer;
 	}

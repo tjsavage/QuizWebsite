@@ -48,7 +48,11 @@ public class Question {
 	}
 	
 	public String getAnswerString() {
-		return "";
+		String answer = "";
+		for(int i = 1; i < correctAnswers.size(); i++) {
+			answer += correctAnswers.get(i) + "";
+		}
+		return answer;
 	}
 	
 	public int getOrderIndex() {

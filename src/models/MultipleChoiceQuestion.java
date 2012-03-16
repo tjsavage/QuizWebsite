@@ -25,7 +25,7 @@ public class MultipleChoiceQuestion extends Question {
 	public String getAnswerString() {
 		String answer = "";
 		for(int i = 1; i < correctAnswers.size(); i++) {
-			answer += ", " + correctAnswers.get(i);
+			answer += correctAnswers.get(i) + "";
 		}
 		return answer;
 	}
