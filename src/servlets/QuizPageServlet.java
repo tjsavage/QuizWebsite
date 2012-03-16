@@ -46,7 +46,7 @@ public class QuizPageServlet extends HttpServlet {
 		QuizResultFactory resultFactory = QuizResultFactory.sharedInstance();
 		ArrayList<QuizResult> quizResultsByDate = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.DATE);
 		ArrayList<QuizResult> quizResultsByScore = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.SCORE);
-		ArrayList<QuizResult> quizResultsForUser = resultFactory.retrieveQuizResultsForUser(user.getID());
+		ArrayList<QuizResult> quizResultsForUser = resultFactory.retrieveQuizResultsOnQuizForUser(quizID, user.getID());
 		
 		request.setAttribute("quiz", quiz);
 		request.setAttribute("quizResultsByDate", quizResultsByDate);

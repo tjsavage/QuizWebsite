@@ -5,6 +5,7 @@
 <%@ page import="models.UserFactory" %>
 <%@ page import="models.Message" %>
 <%@ page import="models.Image" %>
+<%@ page import="models.QuizResult" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -76,7 +77,7 @@
 				out.println("<li> <a href = \"OtherUserServlet?id=" + friends.get(i).getID() + "\">" + friends.get(i).getUsername() + "</a> </li>");
 			}
 		%>
-		<p> pending requests: </p>
+		<p> pending requestz: </p>
 		<%
 			ArrayList<User> pendingFriends = (ArrayList<User>) request.getAttribute("pendingFriends");
 			for (int i = 0; i < pendingFriends.size(); i++) {
@@ -95,6 +96,7 @@
 				out.println("</li>");
 			}
 		%>
+		
 		</div>
 		<form method = "get" action = "ChallengeServlet" >
 			<p> 
@@ -104,6 +106,7 @@
 		<%	 
 			out.print("<a href = \"FriendSearchServlet\"> find friends </a>");
 		%>
+		<jsp:include page="templates/recent_activity.jsp" />
 	</div>
 	</div>
 </body>

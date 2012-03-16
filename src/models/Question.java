@@ -49,8 +49,8 @@ public class Question {
 	
 	public String getAnswerString() {
 		String answer = "";
-		for(int i = 1; i < correctAnswers.size(); i++) {
-			answer += correctAnswers.get(i) + "";
+		for(int i = 0; i < correctAnswers.size(); i++) {
+			answer += correctAnswers.get(i) + ", ";
 		}
 		return answer;
 	}

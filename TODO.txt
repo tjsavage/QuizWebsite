@@ -7,10 +7,7 @@ todo:
 	- see site stats (# of users and # of quizzes taken)
 	
 - add things to home page
-	- admin announcements
-	- list of popular quizzes
 	- list of recently created quizzes
-	- list of player's recent activity (quiz taking and creating)
 	- achievements
 	- messages
 	- friends recent activities

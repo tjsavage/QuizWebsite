@@ -46,6 +46,56 @@ public class QuizFactory {
 		return null;
 	}
 	
+	public ArrayList<Quiz> retrievePopularQuizzes() {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet result = connection.performQuery("select quizID, num_taken from (select quizID, count(quizID) as num_taken from quiz_results group by quizID) AS T ORDER BY quizID asc LIMIT 5");
+		
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		
+		try {
+			while(result.next()) {
+				quizzes.add(retrieveQuiz(result.getInt("quizID")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return quizzes;
+	}
+	
+	public ArrayList<Quiz> retrieveNewQuizzes() {
+		return getQuizzesWithQuery("select * from quizzes order by date_created desc limit 5");
+	}
+	
+	public ArrayList<Quiz> retrieveRecentlyCreatedQuizzesByUser(int userID) {
+		return getQuizzesWithQuery("select * from quizzes where creator=" + userID + " order by date_created desc limit 5");
+	}
+	
+	public ArrayList<Quiz> retrieveRecentlyCreatedQuizzes() {
+		return getQuizzesWithQuery("select * from quizzes order by date_created desc limit 5");
+	}
+	
+	public ArrayList<Quiz> retrieveFriendsQuizzes(int userID) {
+		return getQuizzesWithQuery("select * from quizzes where creator in (select friend2ID from friends_join where friend1ID=" + userID + ") order by date_created limit 5");
+	}
+	
+	public ArrayList<Quiz> getQuizzesWithQuery(String query) {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet result = connection.performQuery(query);
+		
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		
+		try {
+			while(result.next()) {
+				quizzes.add(getQuizFromResult(result));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return quizzes;
+	}
+		
 	public Quiz getQuizFromResult(ResultSet result) throws SQLException {
 		int quizID = result.getInt("id");
 		String name = result.getString("name");

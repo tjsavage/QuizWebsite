@@ -61,4 +61,9 @@ public class QuizResult {
 	public void setCompletionTime(int completionTime) {
 		this.completionTime = completionTime;
 	}
+	
+	public Quiz getQuiz() {
+		QuizFactory qf = QuizFactory.sharedInstance();
+		return qf.retrieveQuiz(quizID);
+	}
 }

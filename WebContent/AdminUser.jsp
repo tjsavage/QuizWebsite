@@ -101,6 +101,7 @@
 			}
 		%>
 		</div>
+		<jsp:include page="templates/recent_activity.jsp" />
 		<form method = "get" action = "ChallengeServlet" >
 			<p> 
 				<input type = "submit" value= "View Challenges">

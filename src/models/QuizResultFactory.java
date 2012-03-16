@@ -80,7 +80,7 @@ public class QuizResultFactory {
 	
 	public ArrayList<QuizResult> retrieveQuizResultsForUser(int userID) {
 		DBConnection connection = DBConnection.sharedInstance();
-		ResultSet rs = connection.performQuery("SELECT * FROM quiz_results WHERE userID=" + userID);
+		ResultSet rs = connection.performQuery("SELECT * FROM quiz_results WHERE userID=" + userID + " order by date_taken desc");
 		ArrayList<QuizResult> results;
 		try {
 			results = new ArrayList<QuizResult>();
@@ -89,6 +89,48 @@ public class QuizResultFactory {
 				int score = rs.getInt("score");
 				Date taken = rs.getDate("date_taken");
 				int completionTime = rs.getInt("completion_time");
+				
+				results.add(new QuizResult(quizID, userID, score, completionTime, taken));
+			}
+			return results;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<QuizResult> retrieveQuizResultsOnQuizForUser(int quizID, int userID) {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT * FROM quiz_results WHERE quizID=" + quizID + " and userID=" + userID + " order by date_taken desc");
+		ArrayList<QuizResult> results;
+		try {
+			results = new ArrayList<QuizResult>();
+			while(rs.next()) {
+				int score = rs.getInt("score");
+				Date taken = rs.getDate("date_taken");
+				int completionTime = rs.getInt("completion_time");
+				
+				results.add(new QuizResult(quizID, userID, score, completionTime, taken));
+			}
+			return results;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<QuizResult> retrieveFriendsQuizResults(int userID) {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT * FROM quiz_results WHERE userID in (SELECT friend2ID FROM friends_join WHERE friend1ID=" + userID + ") order by date_taken limit 5");
+		
+		ArrayList<QuizResult> results;
+		try {
+			results = new ArrayList<QuizResult>();
+			while(rs.next()) {
+				int score = rs.getInt("score");
+				Date taken = rs.getDate("date_taken");
+				int completionTime = rs.getInt("completion_time");
+				int quizID = rs.getInt("quizID");
 				
 				results.add(new QuizResult(quizID, userID, score, completionTime, taken));
 			}

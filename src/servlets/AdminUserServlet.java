@@ -16,6 +16,10 @@ import models.Image;
 import models.ImageFactory;
 import models.Message;
 import models.MessageFactory;
+import models.Quiz;
+import models.QuizFactory;
+import models.QuizResult;
+import models.QuizResultFactory;
 import models.User;
 import models.UserFactory;
 
@@ -40,14 +44,17 @@ public class AdminUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		User user = (User) request.getSession().getAttribute("user");
-		if (!user.isLoggedIn()) {
+		if (user == null || !user.isLoggedIn()) {
 			response.sendRedirect("LoginServlet");
+			return;
 		}
 		
 		UserFactory uf = new UserFactory();
 		MessageFactory mf = new MessageFactory();
 		AnouncementFactory af = new AnouncementFactory();
 		ImageFactory imgf =ImageFactory.sharedInstance();
+		QuizFactory qf = QuizFactory.sharedInstance();
+		QuizResultFactory qrf = QuizResultFactory.sharedInstance();
 		
 		int id = user.getID();
 		
@@ -58,7 +65,19 @@ public class AdminUserServlet extends HttpServlet {
 		ArrayList<Message> inbox = mf.getInbox(id);
 		ArrayList<Message> sent = mf.getSent(id);
 		ArrayList<Anouncement> anouncements = af.getFiveMostRecentAdmin();
+		ArrayList<Quiz> popularQuizzes = qf.retrievePopularQuizzes();
+		ArrayList<Quiz> newQuizzes = qf.retrieveNewQuizzes();
+		ArrayList<QuizResult> recentScores = qrf.retrieveQuizResultsForUser(id);
+		ArrayList<Quiz> usersNewQuizzes = qf.retrieveRecentlyCreatedQuizzesByUser(id);
+		ArrayList<Quiz> friendsNewQuizzes = qf.retrieveFriendsQuizzes(id);
+		ArrayList<QuizResult> friendsRecentScores = qrf.retrieveFriendsQuizResults(id);
 		
+		request.setAttribute("friendsNewQuizzes", friendsNewQuizzes);
+		request.setAttribute("friendsRecentScores", friendsRecentScores);
+		request.setAttribute("popularQuizzes", popularQuizzes);
+		request.setAttribute("newQuizzes", newQuizzes);
+		request.setAttribute("recentScores", recentScores);
+		request.setAttribute("usersNewQuizzes", usersNewQuizzes);
 		request.setAttribute("profileImage", profileImage);
 		request.setAttribute("anouncements", anouncements);
 		request.setAttribute("inbox", inbox);

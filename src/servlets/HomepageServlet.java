@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.AnouncementFactory;
 import models.Anouncement;
+import models.Quiz;
+import models.QuizFactory;
 import models.User;
 
 /**
@@ -39,10 +41,13 @@ public class HomepageServlet extends HttpServlet {
 			return;
 		}
 		AnouncementFactory af = AnouncementFactory.sharedInstance();
+		
+		
 		ArrayList<Anouncement> announcements = af.getFiveMostRecentAdmin();
 		
 		
 		request.setAttribute("announcements", announcements);
+		
 		request.setAttribute("user", user);
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("Homepage.jsp");

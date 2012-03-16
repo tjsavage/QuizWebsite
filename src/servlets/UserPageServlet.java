@@ -16,6 +16,10 @@ import models.Image;
 import models.ImageFactory;
 import models.Message;
 import models.MessageFactory;
+import models.Quiz;
+import models.QuizFactory;
+import models.QuizResult;
+import models.QuizResultFactory;
 import models.User;
 import models.UserFactory;
 
@@ -51,6 +55,8 @@ public class UserPageServlet extends HttpServlet {
 			MessageFactory mf = new MessageFactory();
 			AnouncementFactory af = new AnouncementFactory();
 			ImageFactory imgf =ImageFactory.sharedInstance();
+			QuizFactory qf = QuizFactory.sharedInstance();
+			QuizResultFactory qrf = QuizResultFactory.sharedInstance();
 			int id = user.getID();
 			
 			Image profileImage = imgf.getProfileImage(user.getID()); 
@@ -60,7 +66,19 @@ public class UserPageServlet extends HttpServlet {
 			ArrayList<User> friends = uf.getFriends(id);
 			ArrayList<Message> inbox = mf.getInbox(id);
 			ArrayList<Message> sent = mf.getSent(id);
+			ArrayList<Quiz> popularQuizzes = qf.retrievePopularQuizzes();
+			ArrayList<Quiz> newQuizzes = qf.retrieveNewQuizzes();
+			ArrayList<QuizResult> recentScores = qrf.retrieveQuizResultsForUser(id);
+			ArrayList<Quiz> usersNewQuizzes = qf.retrieveRecentlyCreatedQuizzesByUser(id);
+			ArrayList<Quiz> friendsNewQuizzes = qf.retrieveFriendsQuizzes(id);
+			ArrayList<QuizResult> friendsRecentScores = qrf.retrieveFriendsQuizResults(id);
 			
+			request.setAttribute("friendsNewQuizzes", friendsNewQuizzes);
+			request.setAttribute("friendsRecentScores", friendsRecentScores);
+			request.setAttribute("popularQuizzes", popularQuizzes);
+			request.setAttribute("newQuizzes", newQuizzes);
+			request.setAttribute("recentScores", recentScores);
+			request.setAttribute("usersNewQuizzes", usersNewQuizzes);
 			request.setAttribute("profileImage", profileImage);
 			request.setAttribute("anouncements", anouncements);
 			request.setAttribute("inbox", inbox);
@@ -68,6 +86,7 @@ public class UserPageServlet extends HttpServlet {
 			request.setAttribute("pendingFriends", pendingFriends);
 			request.setAttribute("friendRequests", friendRequests);
 			request.setAttribute("friends", friends);
+			
 			
 			RequestDispatcher dispatch;
 			dispatch = request.getRequestDispatcher("UserPage.jsp");
