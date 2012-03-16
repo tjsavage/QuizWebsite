@@ -8,6 +8,7 @@ public class User {
 	private String username;
 	private String password;
 	private boolean isLoggedIn;
+	private boolean isAdmin;
 	private int id;
 	
 	public User(boolean isLoggedIn) {
@@ -15,18 +16,6 @@ public class User {
 	}
 	
 	public void setID(int id) {
-		// Trying to keep this simple/obvious
-		/* int id = 0;
-		DBConnection connection = DBConnection.sharedInstance();
-		System.out.print(username);
-		ResultSet rs = connection.performQuery(" SELECT * FROM users WHERE username = '" + username + "'");
-		try {
-			if (rs.next()) {
-				id = rs.getInt("id");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} */
 		this.id = id;
 	}
 	
@@ -97,6 +86,14 @@ public class User {
 			e.printStackTrace();
 		}
 		return false;//on failure, should we instead return true??
+	}
+	
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
+	public boolean getAdmin() {
+		return isAdmin;
 	}
 	
 }

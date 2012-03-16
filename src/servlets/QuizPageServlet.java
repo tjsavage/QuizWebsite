@@ -49,6 +49,7 @@ public class QuizPageServlet extends HttpServlet {
 		request.setAttribute("quizResultsByDate", quizResultsByDate);
 		request.setAttribute("quizResultsByScore", quizResultsByScore);
 		request.setAttribute("quizResultsForUser", quizResultsForUser);
+		request.setAttribute("isAdmin", user.getAdmin());
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("QuizPage.jsp");
 		dispatch.forward(request, response);

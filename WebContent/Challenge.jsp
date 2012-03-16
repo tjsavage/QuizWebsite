@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="models.Challenge" %>
+<%@ page import="models.User" %>
+<%@ page import="models.UserFactory" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,9 +22,16 @@
 	<%
 		ArrayList<Challenge> challenges = (ArrayList<Challenge>) request.getAttribute("challenges");
 		for (int i = 0; i < challenges.size(); i++) {
-			out.println("<li> <a href = \"QuizPage?id=" + challenges.get(i).getID() + "\">" + challenges.get(i).getUsername() + "</a> </li>");
+			UserFactory uf = new UserFactory();
+			String username = uf.getUserFromID(challenges.get(i).getFromID()).getUsername();
+			out.println("<li> <a href = \"QuizPage?id=" + challenges.get(i).getID() + "\">" + username + "</a> </li>");
 		}
 	%>
+	<form method = "get" action = "SendChallengeServlet" >
+			<p> 
+				<input type = "submit" value= "Challenge a friend">
+			</p>
+	</form>
 </div>
 </div>
 </body>

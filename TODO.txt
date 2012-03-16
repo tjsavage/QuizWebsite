@@ -1,13 +1,10 @@
 todo:
-- encrypt users passwords in the database
 - display user's history on the home page
-- achievements
+
 - admin interface
-	- create announcements that display on homepage
-	- remove user accounts
-	- remove quizes
+	
 	- clear all history information for a quiz
-	- promote user accounts to admin accounts
+
 	- see site stats (# of users and # of quizzes taken)
 - add things to home page
 	- admin announcements
@@ -24,3 +21,12 @@ todo:
 - quiz rating and reviews?
 - practice mode?
 - create read me which lists team members and all features
+
+
+
+finished:
+- remove quizes
+- create announcements that display on homepage
+- encrypt users passwords in the database
+- promote user accounts to admin accounts
+- remove user accounts

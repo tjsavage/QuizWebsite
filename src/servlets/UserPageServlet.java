@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Anouncement;
+import models.AnouncementFactory;
 import models.Message;
 import models.MessageFactory;
 import models.User;
@@ -34,23 +36,34 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatch;; 
-		UserFactory uf = new UserFactory();
-		MessageFactory mf = new MessageFactory();
 		User user = (User) request.getSession().getAttribute("user");
-		int id = user.getID();
-		ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
-		ArrayList<User> friendRequests = uf.getFriendRequests(id);
-		ArrayList<User> friends = uf.getFriends(id);
-		ArrayList<Message> inbox = mf.getInbox(id);
-		ArrayList<Message> sent = mf.getSent(id);
-		request.setAttribute("inbox", inbox);
-		request.setAttribute("sent", sent);
-		request.setAttribute("pendingFriends", pendingFriends);
-		request.setAttribute("friendRequests", friendRequests);
-		request.setAttribute("friends", friends);
-		dispatch = request.getRequestDispatcher("UserPage.jsp");
-		dispatch.forward(request, response);
+		if (user.getAdmin()) {
+			request.getSession().setAttribute("user", user);
+			response.sendRedirect("/QuizWebsite/AdminUserServlet");
+		} else {
+			UserFactory uf = new UserFactory();
+			MessageFactory mf = new MessageFactory();
+			AnouncementFactory af = new AnouncementFactory();
+			int id = user.getID();
+			
+			ArrayList<Anouncement> anouncements = af.getFiveMostRecentUser();
+			ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
+			ArrayList<User> friendRequests = uf.getFriendRequests(id);
+			ArrayList<User> friends = uf.getFriends(id);
+			ArrayList<Message> inbox = mf.getInbox(id);
+			ArrayList<Message> sent = mf.getSent(id);
+			
+			request.setAttribute("anouncements", anouncements);
+			request.setAttribute("inbox", inbox);
+			request.setAttribute("sent", sent);
+			request.setAttribute("pendingFriends", pendingFriends);
+			request.setAttribute("friendRequests", friendRequests);
+			request.setAttribute("friends", friends);
+			
+			RequestDispatcher dispatch;
+			dispatch = request.getRequestDispatcher("UserPage.jsp");
+			dispatch.forward(request, response);
+		}
 	}
 
 	/**

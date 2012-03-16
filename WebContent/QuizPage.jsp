@@ -28,6 +28,13 @@
 <% } else { %>
 <h1><%= quiz.getName() %><small>Created by <a href="UserPageServlet?id=<%= quiz.getCreatorID() %>"><%= quiz.getCreator().getUsername() %></a></small></h1>
 <p><%= quiz.getDescription() %></p>
+		<% 
+				if ((Boolean) request.getAttribute("isAdmin")) {
+					out.print("<form method = \"get\" action = \"RemoveQuizServlet\" >");
+					out.print("<input type = \"hidden\" name = \"id\" value = '" + quiz.getId()  + "'>");
+					out.print("<input type = \"submit\" value= \"delete this quiz\" ></form>");
+				}
+		%>
 <h3>Top Scores</h3>
 <table>
 	<thead>

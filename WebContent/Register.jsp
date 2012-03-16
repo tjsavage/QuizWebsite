@@ -25,7 +25,7 @@
 			<p> 
 				User Name: <input type="text" name=username>
 				<br>
-				Password: <input type="text" name=password>
+				Password: <input type="password" name=password>
 				<input type = "submit" value= "Register">
 			</p>
 		</form>

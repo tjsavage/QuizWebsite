@@ -21,6 +21,17 @@
 <div class="container">
 	<div class="wrapper">
 	<h1> <% out.print(other.getUsername() + "'s page"); %> </h1>
+		</div>
+		<% 
+				if ((Boolean) request.getAttribute("isAdmin")) {
+					out.print("<form method = \"get\" action = \"TerminateUserServlet\" >");
+					out.print("<input type = \"hidden\" name = \"id\" value = '" + other.getID()  + "'>");
+					out.print("<input type = \"submit\" value= \"I don't like him\" ></form>");
+					out.print("<form method = \"get\" action = \"PromoteUserServlet\" >");
+					out.print("<input type = \"hidden\" name = \"id\" value = '" + other.getID()  + "'>");
+					out.print("<input type = \"submit\" value= \"He needs a promotion\" ></form>");
+				}
+		%>
 		<p> 
 			<% 
 				if ((Boolean) request.getAttribute("isWaiting")) out.print("Your friend request is pending.");

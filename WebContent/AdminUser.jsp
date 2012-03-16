@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="models.User" %>
-<%@ page import="models.Anouncement" %>
 <%@ page import="models.UserFactory" %>
 <%@ page import="models.Message" %>
+<%@ page import="models.Anouncement" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,9 +20,14 @@
 	<jsp:include page="templates/nav.jsp" />
 	<div class="container">
 	<div class="wrapper">
-		<h1> <% out.print(user.getUsername() + "'s page"); %> </h1>
+		<h1> <% out.print(user.getUsername() + "'s Admin page"); %> </h1>
 		
 		<div class="span4">
+		<form method = "get" action = "SendAnouncementServlet" >
+			<p> 
+				<input type = "submit" value= "Make an anouncement">
+			</p>
+		</form>
 		<p> recent announcements: </p>
 		<%
 			ArrayList<Anouncement> anouncements = (ArrayList<Anouncement>) request.getAttribute("anouncements");

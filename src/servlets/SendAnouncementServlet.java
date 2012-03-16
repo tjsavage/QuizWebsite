@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.AdminControl;
 import models.User;
 import models.UserFactory;
 
 /**
- * Servlet implementation class OtherUserServlet
+ * Servlet implementation class SendAnouncementServlet
  */
-@WebServlet("/OtherUserServlet")
-public class OtherUserServlet extends HttpServlet {
+@WebServlet("/SendAnouncementServlet")
+public class SendAnouncementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OtherUserServlet() {
+    public SendAnouncementServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +31,9 @@ public class OtherUserServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatch;
-		int id = Integer.parseInt(request.getParameter("id"));
-		UserFactory uf = new UserFactory();
-		User other = uf.getUserFromID(id);
-		User user = (User) request.getSession().getAttribute("user");
-		request.setAttribute("isAdmin", user.getAdmin());
-		request.setAttribute("isFriend", user.isFriend(other.getID()));
-		request.setAttribute("isWaiting", user.isWaiting(other.getID()));
-		request.setAttribute("other", other);
-		dispatch = request.getRequestDispatcher("OtherUser.jsp");
+		dispatch = request.getRequestDispatcher("SendAnouncement.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -48,7 +41,13 @@ public class OtherUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		User user = (User) request.getSession().getAttribute("user");
+		String anouncement = (String) request.getParameter("anouncement");
+		boolean isAdminOnly = false;
+		if (request.getParameter("isAdminOnly") != null) isAdminOnly = true;
+		AdminControl ac = AdminControl.sharedInstance();
+		ac.sendAnouncement(user.getID(), anouncement, isAdminOnly);
+		response.sendRedirect("/QuizWebsite/UserPageServlet");
 	}
 
 }

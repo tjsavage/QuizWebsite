@@ -21,6 +21,12 @@ public class UserFactory {
 		return getUsers(id, " SELECT * FROM users WHERE NOT id = ");
 	}
 	
+	public ArrayList<User> getAdmins(boolean isAdmin) {
+		int i = 0;
+		if (isAdmin) i = 1;
+		return getUsers(i, " SELECT * FROM users WHERE isAdmin = ");
+	}
+	
 	public ArrayList<User> getPendingFriendRequests(int id) {
 		DBConnection connection = DBConnection.sharedInstance();
 		ArrayList<User> users = new ArrayList<User>();
@@ -75,6 +81,8 @@ public class UserFactory {
 				User user = new User(false);
 				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
+				boolean isAdmin = (rs.getInt("isAdmin") == 1);
+				user.setAdmin(isAdmin);
 				user.setID(rs.getInt("id"));
 				users.add(user);
 			}
@@ -93,6 +101,8 @@ public class UserFactory {
 			if(rs.next()) {
 				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
+				boolean isAdmin = (rs.getInt("isAdmin") == 1);
+				user.setAdmin(isAdmin);
 				user.setID(id);
 			}
 		} catch (SQLException e) {
