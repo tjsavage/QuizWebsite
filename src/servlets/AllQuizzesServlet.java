@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Quiz;
 import models.QuizFactory;
+import models.User;
 
 /**
  * Servlet implementation class AllQuizzesServlet
@@ -32,6 +33,12 @@ public class AllQuizzesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null || !user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+		
 		QuizFactory factory = QuizFactory.sharedInstance();
 		ArrayList<Quiz> quizzes = factory.retrieveAllQuizzes();
 		request.setAttribute("quizzes", quizzes);

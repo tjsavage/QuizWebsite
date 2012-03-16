@@ -38,6 +38,10 @@ public class AdminUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
+		
 		UserFactory uf = new UserFactory();
 		MessageFactory mf = new MessageFactory();
 		AnouncementFactory af = new AnouncementFactory();

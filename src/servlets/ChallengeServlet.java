@@ -34,6 +34,10 @@ public class ChallengeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
+		
 		ArrayList<Challenge> challenges = new ArrayList<Challenge>();
 		ChallengeFactory cf = new ChallengeFactory();
 		challenges = cf.getInbox(user.getID());

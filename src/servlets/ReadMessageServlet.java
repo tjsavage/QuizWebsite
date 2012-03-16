@@ -42,7 +42,9 @@ public class ReadMessageServlet extends HttpServlet {
 		boolean isInbox;
 //		System.out.print(((User)(request.getSession().getAttribute("user"))).getID());
 //		System.out.print(message.getFromID());
-		if (((User)(request.getSession().getAttribute("user"))).getID() == message.getFromID()) {
+		User user = ((User)(request.getSession().getAttribute("user")));
+		if (!user.isLoggedIn()) response.sendRedirect("LoginServlet");
+		if (user.getID() == message.getFromID()) {
 			other = uf.getUserFromID(message.getToID());
 			isInbox = false;
 		} else {

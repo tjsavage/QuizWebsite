@@ -42,6 +42,10 @@ public class SendAnouncementServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
+		
 		String anouncement = (String) request.getParameter("anouncement");
 		boolean isAdminOnly = false;
 		if (request.getParameter("isAdminOnly") != null) isAdminOnly = true;

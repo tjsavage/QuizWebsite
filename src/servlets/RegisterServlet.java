@@ -44,7 +44,13 @@ public class RegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		UserAuthentication userAuthentication = new UserAuthentication();
 		User user = userAuthentication.Register(username, password);
+		if (user == null) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+		
 		if (user != null) {
+			user.setLoggedIn(true);
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect("/QuizWebsite/HomepageServlet");
 		} else {

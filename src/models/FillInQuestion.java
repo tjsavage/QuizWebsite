@@ -17,7 +17,7 @@ public class FillInQuestion extends Question {
 	}
 	
 	public String getAnswerString() {
-		String answer = correctAnswers.get(0);
+		String answer = "";
 		for(String str : correctAnswers) {
 			answer += ", " + str;
 		}

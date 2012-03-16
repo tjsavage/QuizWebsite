@@ -36,6 +36,10 @@ public class OtherUserServlet extends HttpServlet {
 		UserFactory uf = new UserFactory();
 		User other = uf.getUserFromID(id);
 		User user = (User) request.getSession().getAttribute("user");
+		if (!user.isLoggedIn()) {
+			response.sendRedirect("LoginServlet");
+		}
+		
 		request.setAttribute("isAdmin", user.getAdmin());
 		request.setAttribute("isFriend", user.isFriend(other.getID()));
 		request.setAttribute("isWaiting", user.isWaiting(other.getID()));

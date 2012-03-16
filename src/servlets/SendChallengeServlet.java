@@ -39,6 +39,10 @@ public class SendChallengeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
+			response.sendRedirect("LoginServlet");
+		}
+		
 		UserFactory uf = new UserFactory();
 		ArrayList<User> friends = uf.getFriends(user.getID());
 		request.setAttribute("friends", friends);

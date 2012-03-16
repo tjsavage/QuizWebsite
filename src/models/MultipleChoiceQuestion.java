@@ -23,7 +23,7 @@ public class MultipleChoiceQuestion extends Question {
 	}
 	
 	public String getAnswerString() {
-		String answer = correctAnswers.get(0);
+		String answer = "";
 		for(int i = 1; i < correctAnswers.size(); i++) {
 			answer += ", " + correctAnswers.get(i);
 		}
