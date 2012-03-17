@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Send A Challenge</title>
 </head>
-<body>
+<body class = "challenge">
 	<h1>Challenge them!</h1>
 	<form method = "post" action= "SendChallengeServlet"> 
 		<div>
@@ -26,7 +26,7 @@
 		</div>
 		<div>
 			Select a quiz to challenge them with:
-			<select name = "quizID">
+			<select name = "id">
 				<%
 					ArrayList<Quiz> quizzes = (ArrayList<Quiz>) request.getAttribute("quizzes");
 					for (int i = 0; i < quizzes.size(); i++) {

@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		if(user != null && !user.isLoggedIn()) {
 			user.setLoggedIn(true);
 			request.getSession().setAttribute("user", user);
-			response.sendRedirect("/QuizWebsite/HomepageServlet");
+			response.sendRedirect("/QuizWebsite/UserPageServlet");
 		} else {
 			request.setAttribute("isIncorrect", true);
 			dispatch = request.getRequestDispatcher("Login.jsp");
