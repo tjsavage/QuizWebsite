@@ -8,6 +8,7 @@
 	ArrayList<QuizResult> quizResultsByScore = (ArrayList<QuizResult>)request.getAttribute("quizResultsByScore");
 	ArrayList<QuizResult> quizResultsByDate = (ArrayList<QuizResult>)request.getAttribute("quizResultsByDate");
 	ArrayList<QuizResult> quizResultsForUser = (ArrayList<QuizResult>)request.getAttribute("quizResultsForUser");
+	ArrayList<QuizResult> quizResultsToday = (ArrayList<QuizResult>)request.getAttribute("quizResultsToday");
 	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,7 +40,8 @@
 				}
 		%>
 <br>
-<h3>Top Scores</h3>
+<h3>Average Score - <%= request.getAttribute("averageScore") %></h3>
+<h3>Top Scores - All Time</h3>
 <table>
 	<thead>
 		<tr><th>User</th><th>Score</th><th>Date</th><th>Time Taken</th></tr>
@@ -47,6 +49,24 @@
 	<tbody>
 		<% for(int i = 0; i < quizResultsByScore.size(); i++) { 
 			QuizResult r = quizResultsByScore.get(i);
+		%>
+			 <tr><td><a href="UserPageServlet?id=<%= r.getUserID() %>"><%= r.getUser().getUsername() %></a></td>
+			 <td><%= r.getScore() %></td>
+			 <td><%= r.getDateTaken() %></td> 
+			 <td><%= r.getCompletionTime() %> seconds</td>
+			 </tr>
+		<% } %>
+	</tbody>
+</table>
+
+<h3>Top Scores - Today</h3>
+<table>
+	<thead>
+		<tr><th>User</th><th>Score</th><th>Date</th><th>Time Taken</th></tr>
+	</thead>
+	<tbody>
+		<% for(int i = 0; i < quizResultsToday.size(); i++) { 
+			QuizResult r = quizResultsToday.get(i);
 		%>
 			 <tr><td><a href="UserPageServlet?id=<%= r.getUserID() %>"><%= r.getUser().getUsername() %></a></td>
 			 <td><%= r.getScore() %></td>
