@@ -1,5 +1,5 @@
-Team Members:
-Taylor Savage
+
+user: (Savage, Taylor)
 Jack Reidy
 
 Features:
@@ -26,6 +26,10 @@ Features:
 - profile pictures
 	- picture management
 - quiz history
+-achievments
+	-for creating
+	-for taking
+	-for messaging
 - popular quizzes
 - recently created quizzes
 - quiz data
