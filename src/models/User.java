@@ -52,7 +52,7 @@ public class User {
 		DBConnection connection = DBConnection.sharedInstance();
 		connection.insert("INSERT INTO friends_join (friend1ID, friend2ID) values( " + this.id + " , " + id + ")");
 		connection.insert("INSERT INTO friends_join (friend1ID, friend2ID) values( " + id + " , " + this.id + ")");
-		connection.insert("DELETE FROM friend_requests WHERE friendFromID = " + this.id +  "AND friendToID = " + id);
+		connection.insert("DELETE FROM friend_requests WHERE friendFromID = " + this.id +  " AND friendToID = " + id);
 		connection.insert("DELETE FROM friend_requests WHERE friendFromID = " + id + " AND friendToID = " + this.id);
 	}
 	

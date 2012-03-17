@@ -31,8 +31,9 @@
 		<br>
 		<a href = "AddImageServlet" class = "btn" > add a picture</a>
 		<a href = "FriendSearchServlet" class = "btn" >   find friends  </a>
+		<a href = "ChallengeServlet" class = "btn" >   view challenges  </a>
 		<br>
-		<a href = "FriendSearchServlet" >   <h2>Friends (<%=friends.size() %>)</h2>  </a>
+		<a href = "FriendsServlet" >   <h2>Friends (<%=friends.size() %>)</h2>  </a>
 		
 		<h2> recent announcements: </h2>
 		<ul class="menu">
@@ -45,8 +46,8 @@
 			}
 		%>
 		</ul>
-		<p> inbox: </p>
-		<ul id="list1">
+		<h2> inbox: </h2>
+		<ul class="mail">
 		<%
 			ArrayList<Message> inbox = (ArrayList<Message>) request.getAttribute("inbox");
 			for (int i = 0; i < inbox.size(); i++) {
@@ -57,7 +58,8 @@
 			}
 		%>
 		</ul>
-		<p> sent: </p>
+		<h2> sent: </h2>
+		<ul class="mail">
 		<%
 			ArrayList<Message> sent = (ArrayList<Message>) request.getAttribute("sent");
 			for (int i = 0; i < sent.size(); i++) {
@@ -67,12 +69,8 @@
 				out.println("</li>");
 			}
 		%>
+		</ul>
 		</div>
-		<form method = "get" action = "ChallengeServlet" >
-			<p> 
-				<input type = "submit" value= "View Challenges">
-			</p>
-		</form>
 		<jsp:include page="templates/recent_activity.jsp" />
 	</div>
 	</div>

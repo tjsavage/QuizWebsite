@@ -69,6 +69,9 @@ public class AdminUserServlet extends HttpServlet {
 		ArrayList<Quiz> friendsNewQuizzes = qf.retrieveFriendsQuizzes(id);
 		ArrayList<QuizResult> friendsRecentScores = qrf.retrieveFriendsQuizResults(id);
 		
+		ArrayList<User> friends = uf.getFriends(user.getID());
+		
+		request.setAttribute("friends", friends);
 		request.setAttribute("friendsNewQuizzes", friendsNewQuizzes);
 		request.setAttribute("friendsRecentScores", friendsRecentScores);
 		request.setAttribute("popularQuizzes", popularQuizzes);

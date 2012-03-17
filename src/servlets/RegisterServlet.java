@@ -48,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
 		if (user != null) {
 			user.setLoggedIn(true);
 			request.getSession().setAttribute("user", user);
-			response.sendRedirect("/QuizWebsite/HomepageServlet");
+			response.sendRedirect("/QuizWebsite/UserPageServlet");
 		} else {
 			RequestDispatcher dispatch; 
 			request.setAttribute("isInUse", true);

@@ -39,7 +39,7 @@
 			out.print("<form method = \"get\" action = \"UserPageServlet\" >");
 			out.print("<input type = \"submit\" value= \"I can't stand it\"></form>");
 		} else {
-			out.print("<a href = \"OtherUserServlet?id=" + id +"\" >I can't stand it</a>");
+			out.print("<br><a href = \"OtherUserServlet?id=" + id +"\" >I can't stand it</a>");
 		}
 		%>
 	</div></div>

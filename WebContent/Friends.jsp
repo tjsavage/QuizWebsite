@@ -23,7 +23,7 @@ ImageFactory imgf = ImageFactory.sharedInstance();
 <div class="container">
 	<div class="wrapper">
 <div class="span4">
-	<p> friends: </p>
+	<h2> friends: </h2>
 	<ul class="menu">
 	<%
 		for (int i = 0; i < friends.size(); i++) {
@@ -33,8 +33,8 @@ ImageFactory imgf = ImageFactory.sharedInstance();
 		}
 	%>
 	</ul>
+	<h2> pending request: </h2>
 	<ul class="menu">
-	<p> pending request: </p>
 	<%
 		ArrayList<User> pendingFriends = (ArrayList<User>) request.getAttribute("pendingFriends");
 		for (int i = 0; i < pendingFriends.size(); i++) {
@@ -43,8 +43,8 @@ ImageFactory imgf = ImageFactory.sharedInstance();
 					+ "</a><br><img src='" + imgf.getProfileImage(pendingFriends.get(i).getID()).getUrl() + "' width = '40'/> member since </li>");		}
 	%>
 	</ul>
-	<ul>
-	<p> friend requests: </p>
+	<h2> friend requests: </h2>
+	<ul class="menu">
 	<%
 		ArrayList<User> friendRequests = (ArrayList<User>) request.getAttribute("friendRequests");
 		for (int i = 0; i < friendRequests.size(); i++) {

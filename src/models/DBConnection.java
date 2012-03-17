@@ -61,7 +61,7 @@ public class DBConnection {
 			if (generatedKeys.next()) {
 				return generatedKeys.getInt(1);
 			} else {
-				throw new SQLException("Didn't get back a key for the insert");
+				//throw new SQLException("Didn't get back a key for the insert");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

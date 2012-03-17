@@ -30,7 +30,7 @@
 				if ((Boolean) request.getAttribute("isAdmin")) {
 					out.print("<form method = \"get\" action = \"TerminateUserServlet\" >");
 					out.print("<input type = \"hidden\" name = \"id\" value = '" + other.getID()  + "'>");
-					out.print("<input type = \"submit\" value= \"I don't like him\" ></form>");
+					out.print("<input type = \"submit\" value= \"this user must be terminated\" ></form>");
 					out.print("<form method = \"get\" action = \"PromoteUserServlet\" >");
 					out.print("<input type = \"hidden\" name = \"id\" value = '" + other.getID()  + "'>");
 					out.print("<input type = \"submit\" value= \"He needs a promotion\" ></form>");
@@ -43,13 +43,13 @@
 				else {
 					out.print("You are not friends with " + other.getUsername());
 					out.print("<form method = \"post\" action = \"FriendSearchServlet\" >");
-					out.print("<p> <input type = \"submit\" value= \"Add" + other.getUsername() +  "\" > </p></form>");
+					out.print("<p> <input type = \"submit\" value= \"Add " + other.getUsername() +  "\" > </p></form>");
 				}
 			%>
 		</p>
 	<%
-		out.print("<a href = \"MessageServlet?id=" + other.getID() + "\"> Send them a message. </a> <br>");
-		out.print("<a href = \"UserPageServlet\"> I want to go home. </a>");
+		out.print("<a href = \"MessageServlet?id=" + other.getID() + "\" class = \"btn\"> Send them a message. </a> <br>");
+		out.print("<a href = \"UserPageServlet\" class = \"btn\"> I want to go home. </a>");
 	%>
 </div>
 </div>

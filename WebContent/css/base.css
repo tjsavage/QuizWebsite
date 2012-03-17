@@ -5,7 +5,7 @@ body {
   font-size: 13px;
   line-height: 18px;
   color: #333333;
-  background-color: #f3f2dd;
+  background-color: #ffffff;
 }
 
 .friend {
@@ -30,8 +30,8 @@ background-repeat:no-repeat;
 }
 
 .message {
-	background-position:83%15%;
-	background-size:200px;
+	background-position:80%15%;
+	background-size:300px;
 	background-image:url('http://www.tumblr.com/photo/1280/jackreidy/19423073073/3/tumblr_m106hsHE5i1rpefl4');
 	background-repeat:no-repeat;
 }
@@ -301,6 +301,56 @@ textarea:focus {
 	-webkit-box-shadow: 1px 1px 5px #999;
         box-shadow: 1px 1px 5px #999;
 }
+
+.mail ul {
+	border: solid 1px #CCC;
+	list-style-type:none; 
+	margin: 0 0 0.3em 0;
+}
+
+.mail li {
+	border-spacing: 10; 
+	margin-bottom: 5px;
+	font-weight:bold;
+	border-radius:6px;
+	box-shadow:inset 0px 0px 4px -1px #000000;
+	display:block;
+	padding: 13px;
+	/*border:1px solid #808*/;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:15px;  
+	text-align:left;  
+	text-decoration:none;
+	background: #ffffff;
+	color: #3c4042;
+	overflow: hidden;
+	
+}
+.mail a, .mail a:visited {
+	font-weight:bold;
+	border-radius:6px;
+	box-shadow:inset 0px 0px 4px -1px #000000;
+	display:block;
+	width:9em;
+	padding: 10px;
+	/*border:1px solid #808*/;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:15px;  
+	text-align:left;  
+	text-decoration:none;
+	background: #c2ddef;
+	color: #3c4042;
+	/*width: 20px;	
+*/}
+.mail a:hover {
+	background:#f3f2dd;
+	color:#0088cc;	
+	border: solid 1px #CCC;
+	-moz-box-shadow: 1px 1px 5px #999;
+	-webkit-box-shadow: 1px 1px 5px #999;
+        box-shadow: 1px 1px 5px #999;
+}
+
 
 button,
 input,
