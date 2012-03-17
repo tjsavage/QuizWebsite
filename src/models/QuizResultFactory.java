@@ -63,6 +63,19 @@ public class QuizResultFactory {
 		return null;
 	}
 	
+	public int retrieveUsersBestScore(int quizID, int userID) {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT max(score) as max_score FROM quiz_results WHERE quizID=" + quizID + " and userID=" + userID);
+		try {
+			if (rs.next()) {
+				return rs.getInt("max_score");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public ArrayList<QuizResult> retrieveSortedQuizResultsForQuiz(int quizID, SortingMethod sortBy) {
 		ArrayList<QuizResult> results = retrieveQuizResultsForQuiz(quizID);
 		

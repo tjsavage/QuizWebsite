@@ -9,8 +9,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Send A Challenge</title>
+<jsp:include page="HeaderInclude.jsp" />
+
 </head>
 <body class = "challenge">
+	<jsp:include page="templates/nav.jsp" />
 
 <div class="container">
 	<div class="wrapper">
