@@ -63,6 +63,19 @@ public class QuizResultFactory {
 		return null;
 	}
 	
+	public int retrieveUsersBestScore(int quizID, int userID) {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT max(score) as max_score FROM quiz_results WHERE quizID=" + quizID + " and userID=" + userID);
+		try {
+			if (rs.next()) {
+				return rs.getInt("max_score");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public ArrayList<QuizResult> retrieveSortedQuizResultsForQuiz(int quizID, SortingMethod sortBy) {
 		ArrayList<QuizResult> results = retrieveQuizResultsForQuiz(quizID);
 		
@@ -76,6 +89,28 @@ public class QuizResultFactory {
 		}
 		
 		return results;
+	}
+	
+	public ArrayList<QuizResult> retrieveTodaysQuizResults(int quizID) {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT * FROM quiz_results WHERE quizID=" + quizID + " AND date_taken >= DATE(NOW()) order by date_taken desc");
+		ArrayList<QuizResult> results;
+		try {
+			results = new ArrayList<QuizResult>();
+			while(rs.next()) {
+				int userID = rs.getInt("userID");
+				int score = rs.getInt("score");
+				Date taken = rs.getDate("date_taken");
+				int completionTime = rs.getInt("completion_time");
+				
+				results.add(new QuizResult(quizID, userID, score, completionTime, taken));
+			}
+			Collections.sort(results, new ScoreComparator());
+			return results;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public ArrayList<QuizResult> retrieveQuizResultsForUser(int userID) {
@@ -119,6 +154,20 @@ public class QuizResultFactory {
 		return null;
 	}
 	
+	public double getAverageScore(int quizID) {
+		DBConnection connection = DBConnection.sharedInstance();
+		ResultSet rs = connection.performQuery("SELECT AVG(score) as avg_score FROM quiz_results WHERE quizID=" + quizID);
+		try {
+			if (rs.next()) {
+				return rs.getDouble("avg_score");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
 	public ArrayList<QuizResult> retrieveFriendsQuizResults(int userID) {
 		DBConnection connection = DBConnection.sharedInstance();
 		ResultSet rs = connection.performQuery("SELECT * FROM quiz_results WHERE userID in (SELECT friend2ID FROM friends_join WHERE friend1ID=" + userID + ") order by date_taken limit 5");
@@ -131,8 +180,9 @@ public class QuizResultFactory {
 				Date taken = rs.getDate("date_taken");
 				int completionTime = rs.getInt("completion_time");
 				int quizID = rs.getInt("quizID");
+				int friendsID = rs.getInt("userID");
 				
-				results.add(new QuizResult(quizID, userID, score, completionTime, taken));
+				results.add(new QuizResult(quizID, friendsID, score, completionTime, taken));
 			}
 			return results;
 		} catch (SQLException e) {

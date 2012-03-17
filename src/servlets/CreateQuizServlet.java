@@ -94,7 +94,9 @@ public class CreateQuizServlet extends HttpServlet {
 		
 		Quiz quiz = new Quiz(name, description, user.getID(), ordered, questions, multi_page, immediateCorrection);
 		QuizFactory factory = QuizFactory.sharedInstance();
-		factory.insertQuiz(quiz);
+		int quizID = factory.insertQuiz(quiz);
+		
+		response.sendRedirect("QuizPage?id=" + quizID);
 	}
 	
 	private PictureResponseQuestion parsePictureResponseQuestion(HttpServletRequest request,

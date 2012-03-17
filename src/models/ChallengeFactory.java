@@ -25,6 +25,9 @@ public class ChallengeFactory {
 				challenge.setToID(rs.getInt("friendToID"));
 				challenge.setQuizID(rs.getInt("quizID"));
 				challenge.setCompleted(rs.getInt("completed"));
+				
+				QuizResultFactory qrf = QuizResultFactory.sharedInstance();
+				challenge.setBestScore(qrf.retrieveUsersBestScore(challenge.getQuizID(), challenge.getFromID()));
 				return challenge;
 			}
 		} catch (SQLException e) {
@@ -63,6 +66,9 @@ public class ChallengeFactory {
 				challenge.setToID(rs.getInt("friendToID"));
 				challenge.setQuizID(rs.getInt("quizID"));
 				challenge.setCompleted(rs.getInt("completed"));
+				
+				QuizResultFactory qrf = QuizResultFactory.sharedInstance();
+				challenge.setBestScore(qrf.retrieveUsersBestScore(challenge.getQuizID(), challenge.getFromID()));
 				challenges.add(challenge);
 			}
 		} catch (SQLException e) {

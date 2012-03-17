@@ -139,7 +139,7 @@ public class QuizFactory {
 		return questions;
 	}
 	
-	public void insertQuiz(Quiz quiz) {
+	public int insertQuiz(Quiz quiz) {
 		DBConnection connection = DBConnection.sharedInstance();
 		String queryString = "INSERT INTO quizzes (name, description, creator, ordered, multi_page, immediate_correction) " +
 				"VALUES ('" + quiz.getSafeName() + "', '" + quiz.getSafeDescription() + "', "
@@ -156,5 +156,7 @@ public class QuizFactory {
 			q.setOrderIndex(i);
 			factory.insertQuestion(q);
 		}
+		
+		return quizID;
 	}
 }

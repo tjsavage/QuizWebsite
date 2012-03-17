@@ -39,19 +39,23 @@ public class QuizPageServlet extends HttpServlet {
 		QuizFactory factory = QuizFactory.sharedInstance();
 		Quiz quiz = factory.retrieveQuiz(quizID);
 		User user = (User)request.getSession().getAttribute("user");
-		if (!user.isLoggedIn()) {
+		if (user == null || !user.isLoggedIn()) {
 			response.sendRedirect("LoginServlet");
+			return;
 		}
 		
 		QuizResultFactory resultFactory = QuizResultFactory.sharedInstance();
 		ArrayList<QuizResult> quizResultsByDate = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.DATE);
 		ArrayList<QuizResult> quizResultsByScore = resultFactory.retrieveSortedQuizResultsForQuiz(quizID, QuizResultFactory.SortingMethod.SCORE);
 		ArrayList<QuizResult> quizResultsForUser = resultFactory.retrieveQuizResultsOnQuizForUser(quizID, user.getID());
+		ArrayList<QuizResult> quizResultsToday = resultFactory.retrieveTodaysQuizResults(quizID);		
 		
 		request.setAttribute("quiz", quiz);
+		request.setAttribute("averageScore", resultFactory.getAverageScore(quizID));
 		request.setAttribute("quizResultsByDate", quizResultsByDate);
 		request.setAttribute("quizResultsByScore", quizResultsByScore);
 		request.setAttribute("quizResultsForUser", quizResultsForUser);
+		request.setAttribute("quizResultsToday", quizResultsToday);
 		request.setAttribute("isAdmin", user.getAdmin());
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("QuizPage.jsp");

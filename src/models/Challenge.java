@@ -14,7 +14,16 @@ public class Challenge {
 	private int friendToID;
 	private int quizID;
 	private boolean completed;
+	private int bestScore;
 	
+	public int getBestScore() {
+		return bestScore;
+	}
+
+	public void setBestScore(int bestScore) {
+		this.bestScore = bestScore;
+	}
+
 	public Challenge() {
 		//empty constructor
 	}
@@ -57,6 +66,12 @@ public class Challenge {
 	
 	public boolean getCompleted() {
 		return completed;
+	}
+	
+	public String getQuizName() {
+		QuizFactory qf = QuizFactory.sharedInstance();
+		Quiz q = qf.retrieveQuiz(quizID);
+		return q.getName();
 	}
 	
 }
