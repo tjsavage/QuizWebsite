@@ -30,7 +30,7 @@
 			for (int i = 0; i < users.size(); i++) {
 				out.println("<li> <a href = \"OtherUserServlet?id=" 
 						+ users.get(i).getID() + "\">" + users.get(i).getUsername() 
-							+ "</a><br><img src=\"" + imgf.getProfileImage(users.get(i).getID()).getUrl() + "\" width = \"40\"/> member since </li>");
+							+ "</a><br><img src=\"" + imgf.getProfileImage(users.get(i).getID()).getUrl() + "\" width = \"40\"/></li>");
 				
 			}
 		%>

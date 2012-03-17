@@ -59,7 +59,7 @@ public class SendChallengeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int otherID = Integer.parseInt(request.getParameter("otherID"));
-		int quizID = Integer.parseInt(request.getParameter("quizID"));
+		int quizID = Integer.parseInt(request.getParameter("id"));
 		User user = (User) request.getSession().getAttribute("user"); 
 		
 		Challenge challenge = new Challenge();

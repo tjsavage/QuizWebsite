@@ -9,7 +9,7 @@
 <jsp:include page="HeaderInclude.jsp" />
 
 </head>
-<body>
+<body class = "login">
 	<jsp:include page="templates/nav.jsp" />
 
 <div class="container">
