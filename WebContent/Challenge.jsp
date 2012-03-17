@@ -24,7 +24,7 @@
 		for (int i = 0; i < challenges.size(); i++) {
 			UserFactory uf = new UserFactory();
 			String username = uf.getUserFromID(challenges.get(i).getFromID()).getUsername();
-			out.println("<li> <a href = \"QuizPageServlet?id=" + challenges.get(i).getID() + "\">" + username + "</a> </li>");
+			out.println("<li> <a href='QuizPage?id=" + challenges.get(i).getQuizID() + "' >" + username + "</a> </li>");
 		}
 	%>
 	<form method = "get" action = "SendChallengeServlet" >
