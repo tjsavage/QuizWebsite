@@ -11,6 +11,9 @@
 <title>Send A Challenge</title>
 </head>
 <body class = "challenge">
+
+<div class="container">
+	<div class="wrapper">
 	<h1>Challenge them!</h1>
 	<form method = "post" action= "SendChallengeServlet"> 
 		<div>
@@ -37,7 +40,7 @@
 		</div>
 		<input type = "submit" value= "let's do this!">
 	</form>
-	
+	</div></div>
 </body>
 </html>
 

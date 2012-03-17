@@ -59,9 +59,6 @@ public class AdminUserServlet extends HttpServlet {
 		int id = user.getID();
 		
 		Image profileImage = imgf.getProfileImage(user.getID());
-		ArrayList<User> pendingFriends = uf.getPendingFriendRequests(id);
-		ArrayList<User> friendRequests = uf.getFriendRequests(id);
-		ArrayList<User> friends = uf.getFriends(id);
 		ArrayList<Message> inbox = mf.getInbox(id);
 		ArrayList<Message> sent = mf.getSent(id);
 		ArrayList<Anouncement> anouncements = af.getFiveMostRecentAdmin();
@@ -82,9 +79,6 @@ public class AdminUserServlet extends HttpServlet {
 		request.setAttribute("anouncements", anouncements);
 		request.setAttribute("inbox", inbox);
 		request.setAttribute("sent", sent);
-		request.setAttribute("pendingFriends", pendingFriends);
-		request.setAttribute("friendRequests", friendRequests);
-		request.setAttribute("friends", friends);
 		
 		RequestDispatcher dispatch;
 		dispatch = request.getRequestDispatcher("AdminUser.jsp");
