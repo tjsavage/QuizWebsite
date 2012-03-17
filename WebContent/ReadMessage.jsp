@@ -17,7 +17,7 @@
 <jsp:include page="HeaderInclude.jsp" />
 
 </head>
-<body>
+<body class = "message">
 	<jsp:include page="templates/nav.jsp" />
 
 <div class="container">

@@ -34,7 +34,7 @@
 		<br>
 		<a href = "FriendSearchServlet" >   <h2>Friends (<%=friends.size() %>)</h2>  </a>
 		
-		<p> recent announcements: </p>
+		<h2> recent announcements: </h2>
 		<ul class="menu">
 		<%
 			ArrayList<Anouncement> anouncements = (ArrayList<Anouncement>) request.getAttribute("anouncements");
