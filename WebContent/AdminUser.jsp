@@ -7,6 +7,8 @@
 <%@ page import="models.Anouncement" %>
 <%@ page import="models.AdminControl" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="models.Achievement" %>
+<%@ page import="models.AchievementFactory" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,8 +36,8 @@
 		<a href = "FriendSearchServlet" class = "btn" >   find friends  </a>
 		<a href = "ChallengeServlet" class = "btn" >   view challenges  </a>
 		<br>
-		<a href = "FriendsServlet" >   <h2>Friends (<%=friends.size() %>)</h2>  </a>
 		<a href = "SendAnouncementServlet" class = "btn" >   make an announcement  </a>
+		<a href = "FriendsServlet" >   <h2>Friends (<%=friends.size() %>)</h2>  </a>
 		<h3> Number of users: <%= ac.getNumUsers() %> </h3>
 		<h3> Number of quizzes taken: <%= ac.getNumTaken() %> </h3>
 		<h2> recent announcements: </h2>
@@ -45,6 +47,19 @@
 			for (int i = 0; i < anouncements.size(); i++) {
 				out.print("<li>");
 				out.print(anouncements.get(i).getAnouncement());
+				out.println("</li>");
+			}
+		%>
+		</ul>
+		<h2> Your achievements: </h2>
+		<ul class="menu">
+		<%
+			AchievementFactory af = new AchievementFactory();
+			ArrayList<Achievement> achievements = (ArrayList<Achievement>) af.checkForAchievements(user.getID());
+			for (int i = 0; i < achievements.size(); i++) {
+				out.print("<li class=\"menu\">");
+				out.print(achievements.get(i).getTitle()+ "<br>");
+				out.print(achievements.get(i).getDescription());
 				out.println("</li>");
 			}
 		%>

@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/QuizWebsite/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/QuizWebsite/js/quizCreation.js"></script>
 </head>
-<body>
+<body class = "create">
 	<jsp:include page="templates/nav.jsp" />
 
 <div class="container">

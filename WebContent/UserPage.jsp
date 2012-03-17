@@ -7,6 +7,9 @@
 <%@ page import="models.Image" %>
 <%@ page import="models.QuizResult" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="models.Achievement" %>
+<%@ page import="models.AchievementFactory" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,7 +23,7 @@
 %>
 <title><%= user.getUsername() %></title>
 </head>
-<body>
+<body class = "home">
 	<jsp:include page="templates/nav.jsp" />
 	<div class="container">
 	<div class="wrapper">
@@ -42,6 +45,19 @@
 			for (int i = 0; i < anouncements.size(); i++) {
 				out.print("<li class=\"menu\">");
 				out.print(anouncements.get(i).getAnouncement());
+				out.println("</li>");
+			}
+		%>
+		</ul>
+		<h2> Your achievements: </h2>
+		<ul class="menu">
+		<%
+			AchievementFactory af = new AchievementFactory();
+			ArrayList<Achievement> achievements = (ArrayList<Achievement>) af.checkForAchievements(user.getID());
+			for (int i = 0; i < achievements.size(); i++) {
+				out.print("<li class=\"menu\">");
+				out.print(achievements.get(i).getTitle()+ "<br>");
+				out.print(achievements.get(i).getDescription());
 				out.println("</li>");
 			}
 		%>

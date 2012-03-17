@@ -29,7 +29,7 @@ ImageFactory imgf = ImageFactory.sharedInstance();
 		for (int i = 0; i < friends.size(); i++) {
 			out.println("<li> <a href = \"OtherUserServlet?id=" 
 					+ friends.get(i).getID() + "\">" + friends.get(i).getUsername() 
-					+ "</a><br><img src='" + imgf.getProfileImage(friends.get(i).getID()).getUrl() + "' width = '40'/> member since </li>");
+					+ "</a><br><img src='" + imgf.getProfileImage(friends.get(i).getID()).getUrl() + "' width = '40'/> why don't you say hello? </li>");
 		}
 	%>
 	</ul>
@@ -40,7 +40,7 @@ ImageFactory imgf = ImageFactory.sharedInstance();
 		for (int i = 0; i < pendingFriends.size(); i++) {
 			out.println("<li> <a href = \"OtherUserServlet?id=" 
 					+ pendingFriends.get(i).getID() + "\">" + pendingFriends.get(i).getUsername() 
-					+ "</a><br><img src='" + imgf.getProfileImage(pendingFriends.get(i).getID()).getUrl() + "' width = '40'/> member since </li>");		}
+					+ "</a><br><img src='" + imgf.getProfileImage(pendingFriends.get(i).getID()).getUrl() + "' width = '40'/> you're still waiting </li>");		}
 	%>
 	</ul>
 	<h2> friend requests: </h2>

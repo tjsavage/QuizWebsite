@@ -93,7 +93,7 @@
 </table>
 
 <h3>Popular Quizzes</h3>
-<ul>
+<ul class = "mail">
 	<% ArrayList<Quiz> popularQuizzes = (ArrayList<Quiz>)request.getAttribute("popularQuizzes");
 		for(int i = 0; i < popularQuizzes.size(); i++) {
 			out.println("<li><a href='QuizPage?id=" + popularQuizzes.get(i).getId() + "'>"  + popularQuizzes.get(i).getName() + "</a></li>");

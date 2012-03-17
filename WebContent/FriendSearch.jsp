@@ -16,7 +16,7 @@
 <jsp:include page="HeaderInclude.jsp" />
 
 </head>
-<body class ="friend">
+<body class ="users">
 	<jsp:include page="templates/nav.jsp" />
 
 <div class="container">

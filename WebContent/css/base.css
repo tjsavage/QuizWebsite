@@ -9,9 +9,16 @@ body {
 }
 
 .friend {
-background-position:83%15%;
+background-position:83%40%;
 background-size:400px;
 background-image:url('http://25.media.tumblr.com/tumblr_m104ztwBEX1rpefl4o1_500.png');
+background-repeat:no-repeat;
+}
+
+.users {
+background-position:83%15%;
+background-size:270px;
+background-image:url('http://www.tumblr.com/photo/1280/jackreidy/19431330093/1/tumblr_m10d7gW5jU1rpefl4');
 background-repeat:no-repeat;
 }
 
@@ -29,10 +36,24 @@ background-repeat:no-repeat;
 	background-repeat:no-repeat;
 }
 
+.home {
+	background-position:65%15%;
+	background-size:300px;
+	background-image:url('http://www.tumblr.com/photo/1280/jackreidy/19432073662/1/tumblr_m10dt22puq1rpefl4');
+	background-repeat:no-repeat;
+}
+
 .message {
 	background-position:80%15%;
 	background-size:300px;
 	background-image:url('http://www.tumblr.com/photo/1280/jackreidy/19423073073/3/tumblr_m106hsHE5i1rpefl4');
+	background-repeat:no-repeat;
+}
+
+.create {
+	background-position:50%10%;
+	background-size:100px;
+	background-image:url('http://25.media.tumblr.com/tumblr_m10ctuPw1m1rpefl4o1_400.png');
 	background-repeat:no-repeat;
 }
 
@@ -373,27 +394,26 @@ table {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b1dde8), color-stop(1, #9cd0e8) );
-	background:-moz-linear-gradient( center top, #b1dde8 5%, #9cd0e8 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b1dde8', endColorstr='#9cd0e8');
-	background-color:#b1dde8;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #eaebe6), color-stop(1, #e0e0cc) );
+	background:-moz-linear-gradient( center top, #eaebe6 5%, #e0e0cc 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaebe6', endColorstr='#e0e0cc');
+	background-color:#eaebe6;
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
 	border-radius:6px;
 	border:1px solid #dcdcdc;
 	display:inline-block;
-	color:#777777;
+	color:#5c5c5c;
 	font-family:arial;
-	font-size:15px;
+	font-size:17px;
 	font-weight:bold;
-	padding:6px 24px;
+	padding:6px 33px;
 	text-decoration:none;
-	text-shadow:1px 1px 0px #ffffff;
 }.btn:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9cd0e8), color-stop(1, #b1dde8) );
-	background:-moz-linear-gradient( center top, #9cd0e8 5%, #b1dde8 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9cd0e8', endColorstr='#b1dde8');
-	background-color:#9cd0e8;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e0e0cc), color-stop(1, #eaebe6) );
+	background:-moz-linear-gradient( center top, #e0e0cc 5%, #eaebe6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0e0cc', endColorstr='#eaebe6');
+	background-color:#e0e0cc;
 }.btn:active {
 	position:relative;
 	top:1px;

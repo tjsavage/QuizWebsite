@@ -14,7 +14,7 @@
 
 <div class="container">
 	<div class="wrapper">
-	<h1>Welcome to Jack and taylor's Website</h1>
+	<h1>Welcome to Jack and Taylor's Website</h1>
 		<p> 
 		<%
 		Boolean isIncorrect = (Boolean) request.getAttribute("isIncorrect");
@@ -25,8 +25,8 @@
 		<form method = "post" action = "LoginServlet" >
 			<p> 
 				User Name: <input type="text" name=username>
-				<br>
-				Password: <input type="password" name=password>
+				<br><br>
+				Password:  <input type="password" name=password>
 				<input type = "submit" value= "Login">
 			</p>
 		</form>
