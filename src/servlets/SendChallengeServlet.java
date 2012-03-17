@@ -41,6 +41,7 @@ public class SendChallengeServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
 			response.sendRedirect("LoginServlet");
+			return;
 		}
 		
 		UserFactory uf = new UserFactory();

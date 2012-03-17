@@ -18,7 +18,10 @@
 <title>View Images</title>
 </head>
 <body>
-	<h1> Look at this fucking guy: </h1>
+	<jsp:include page="templates/nav.jsp" />
+	<div class="container">
+	<div class="wrapper">
+	<h1>Check dizz out: </h1>
 		<%
 			for (int i = 0; i < images.size(); i++) {
 				System.out.print(images.get(i).getUrl());
@@ -39,5 +42,6 @@
 			out.print("<a href = \"OtherUserServlet?id=" + id +"\" >I can't stand it</a>");
 		}
 		%>
+	</div></div>
 </body>
 </html>
